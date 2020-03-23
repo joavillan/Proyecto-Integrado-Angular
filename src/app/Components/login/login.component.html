@@ -1,0 +1,31 @@
+<br>
+<br>
+<div class="container">
+<div class="row">
+<div class="col">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 noticiascss">
+      <form>
+        <h1><b>Logueate!</b></h1>
+        <br>
+        <h6>¡Entra y disfruta!</h6>
+        <div class="md-form">
+          <i class="fas fa-user prefix"></i>
+          <input type="text" id="inputIconEx2" class="form-control" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}">
+          <label for="inputIconEx2">Escribe tu nombre de usuario</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-lock prefix"></i>
+          <input type="password" id="inputValidationEx2" class="form-control validate" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}">
+          <label for="inputValidationEx2" data-error="wrong" data-success="right">Escribe tu contraseña aquí</label>
+        </div>
+        <button type="submit" class="btn btn-elegant mb-1" (click)='submit()'>Entrar</button>
+        <br>
+        <br>
+      </form>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>

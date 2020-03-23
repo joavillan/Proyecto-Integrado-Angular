@@ -1,0 +1,83 @@
+<br>
+<div class="col">
+<div class="row">
+    <div class="col-1">
+
+    </div>
+    <div class="col-10">
+        <div class="container">
+            <h1 class="text-white"><b>Lista de Noticias-{{categoria}}</b></h1>
+            <form class="form-inline my-2 my-lg-0">
+            
+        </form>
+        <!--<div class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchArgs" (keyup)="Busqueda(searchArgs)">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="Busqueda(searchArgs)">Search</button>
+        </div>-->
+            <!--<input type="text" class="input" [(ngModel)]="searchArgs"/>
+            <button class="btn btn-primary" (click)="Busqueda(searchArgs)">Buscar</button>-->
+        </div>
+        <br>
+        <div *ngFor = "let receta of recetas,let i = index;">
+            <div class="col">
+                <!--<div class="row capa border border-dark rounded">-->
+                <div class="container">
+                    <div class="row noticiascss card-horizontal">
+                    <div class="foto">
+                        <img src="{{this.receta.img}}" class="rounded float-left img-fluid iconoticias" alt="">
+                    </div>
+                    <div class="col responsive">
+                        <a style="color:black" routerLink="/Post/{{receta.id}}">
+                            <br>
+                            <h5><b>{{receta.titulo}}</b></h5>
+                            <p>{{receta.subtitulo}}</p>
+                        </a>
+                    </div>
+                    <div style="background-color: #211E1E;" class="container">
+                        <div *ngIf='rol=="admin"' class="fluid">
+                            <!--<button class="btn btn-danger float-right" data-toggle="modal" data-target="#EliminarModal" (click)="PreEliminar(p*tpp+i-tpp)">Eliminar</button>-->
+                        </div>
+                        <div class="modal fade" id="EliminarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Eliminar Post</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                 ¿Desea eliminar el post?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                                  <!--<button type="button" class="btn btn-danger" (click)="Eliminar()">Eliminar</button>-->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+            </div>
+            <br>
+            </div>
+        </div>
+    
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+        <div class="col-2">
+        </div>
+        <div class="col-8">
+            <div class="capa">
+       
+                </div>
+        </div>
+        <div class="col-2">
+        </div>
+    </div>
+</div>
+</div>
+</div>

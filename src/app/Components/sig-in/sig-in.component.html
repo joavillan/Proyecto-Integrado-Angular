@@ -1,0 +1,41 @@
+<br>
+<br>
+<div class="container">
+<div class="row">
+<div class="col">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 noticiascss">
+      <form>
+        <h1><b>Regístrate!</b></h1>
+        <br>
+        <h6>¡Entra y disfruta!</h6>
+
+        <div class="md-form">
+          <i class="fas fa-envelope prefix"></i>
+          <input type="text" id="inputIconEx1" class="form-control" [(ngModel)]="mail" [ngModelOptions]="{standalone: true}">
+          <label for="inputIconEx1">E-mail address</label>
+        </div>
+        <div class="md-form">
+          <i class="fas fa-user prefix"></i>
+          <input type="text" id="inputIconEx2" class="form-control" [(ngModel)]="username" [ngModelOptions]="{standalone: true}">
+          <label for="inputIconEx2">Escribe tu nombre de usuario</label>
+        </div>
+        <div class="md-form">
+          <i class="fas fa-lock prefix"></i>
+          <input type="password" id="inputValidationEx2" class="form-control validate" [(ngModel)]="pass1" [ngModelOptions]="{standalone: true}">
+          <label for="inputValidationEx2" data-error="wrong" data-success="right">Escribe tu contraseña aquí</label>
+        </div>
+        <div class="md-form">
+          <i class="fas fa-lock prefix"></i>
+          <input type="password" id="inputValidationEx2" class="form-control validate" [(ngModel)]="pass2" [ngModelOptions]="{standalone: true}">
+          <label for="inputValidationEx2" data-error="wrong" data-success="right">Repite la contraseña</label>
+        </div>
+        <button type="submit" class="btn btn-elegant mb-1" (click)='submit()'>Resgistrarse</button>
+        <br>
+        <br>
+      </form>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
