@@ -6,28 +6,21 @@
     </div>
     <div class="col-10">
         <div class="container">
-            <h1 class="text-white"><b>Lista de Noticias-{{categoria}}</b></h1>
+            <h1><b>Recetas</b></h1>
             <form class="form-inline my-2 my-lg-0">
             
         </form>
-        <!--<div class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchArgs" (keyup)="Busqueda(searchArgs)">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="Busqueda(searchArgs)">Search</button>
-        </div>-->
-            <!--<input type="text" class="input" [(ngModel)]="searchArgs"/>
-            <button class="btn btn-primary" (click)="Busqueda(searchArgs)">Buscar</button>-->
         </div>
         <br>
         <div *ngFor = "let receta of recetas,let i = index;">
             <div class="col">
-                <!--<div class="row capa border border-dark rounded">-->
                 <div class="container">
                     <div class="row noticiascss card-horizontal">
                     <div class="foto">
                         <img src="{{this.receta.img}}" class="rounded float-left img-fluid iconoticias" alt="">
                     </div>
                     <div class="col responsive">
-                        <a style="color:black" routerLink="/Post/{{receta.id}}">
+                        <a style="color:black" routerLink="/Lista/{{receta.id}}">
                             <br>
                             <h5><b>{{receta.titulo}}</b></h5>
                             <p>{{receta.subtitulo}}</p>

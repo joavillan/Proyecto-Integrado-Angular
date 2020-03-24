@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecetaModel } from 'src/app/Models/RecetaModel';
+import { RecetaService } from 'src/app/Services/receta.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lista',
@@ -8,7 +10,7 @@ import { RecetaModel } from 'src/app/Models/RecetaModel';
 })
 export class ListaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:ActivatedRoute,private receta:RecetaService) { }
 
   idElim: any;
   categoria;
@@ -20,6 +22,14 @@ export class ListaComponent implements OnInit {
   tpp = 10;
 
   ngOnInit() {
+    this.load();
   }
 
+  load(){
+    this.receta.getReceta().subscribe((res:any)=>{
+      for(let re of res){
+        this.recetas.push(re);
+      }
+    })
+  }
 }

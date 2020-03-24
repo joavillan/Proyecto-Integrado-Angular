@@ -12,6 +12,7 @@ export class CrearRecetaComponent implements OnInit {
   constructor(private receta:RecetaService, private router:Router) { }
 
   titulo="";
+  subtitulo=""
   categoria="Comidas";
   cuerpo="";
   img="";
@@ -44,6 +45,7 @@ export class CrearRecetaComponent implements OnInit {
     console.log(this.titulo)
     let recetaModel={
       titulo:this.titulo,
+      subtitulo:this.subtitulo,
       categoria:this.categoria,
       cuerpo:this.cuerpo,
       img:this.img,
