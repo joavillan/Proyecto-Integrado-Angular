@@ -25,10 +25,10 @@ export class RecetaComponent implements OnInit {
   obtenerReceta(){
     console.log(this.id);
     this.receta.getRecetaById(this.id).subscribe((res)=>{
+      console.log(res);
       let dummy:any = res;
       console.log(dummy);
       this.recetaPage = dummy;
-
     },(err)=>{
       console.log(err);
       alert('Ha ocurrido un error al obtener el post: \n'+err.err)

@@ -16,6 +16,6 @@ export class RecetaService {
     return this.http.get(URL_API+'recetas')
   }
   getRecetaById(id){
-    return this.http.get(URL_API+'recetas/',id)
+    return this.http.get(URL_API+`recetas/${id}`)
   }
 }

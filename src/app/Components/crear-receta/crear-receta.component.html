@@ -2,7 +2,7 @@
 <div class="col">
 <div class="row">
   <div class="col-1"></div>
-<div class="col-5 noticiascss">
+<div class="col-5">
   <h1><b>Crear Receta</b></h1>
   <h3 class="">Titulo</h3>
     <input type="text" placeholder="Un titulo ..."[(ngModel)]="titulo"/>
@@ -10,19 +10,30 @@
     <h3 class="">Subtitulo</h3>
     <input type="text" placeholder="Un titulo ..."[(ngModel)]="subtitulo"/>
     <br>
+    <h2 class="">Imagen</h2>
+    <div class="input-group mb-3">
+      <div class="custom-file">
+        <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02" (change)="handleFileSelect($event)">>
+        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
+      </div>
+      <div class="input-group-append">
+        <span class="input-group-text" id="inputGroupFileAddon02" (click)="subirImagen()">Subir</span>
+      </div>
+    </div>
+    <br>
     <h3 class="">Categoría</h3>
     <select name="categoria"  id="cat" [(ngModel)]="categoria">
     <option selected>Comidas</option>
     <option>Postres</option>
   </select>
 </div>
-<div class="col-5 noticiascss">
+<div class="col-5">
 </div>
 <div class="col-1"></div>
 </div>
 <div class="row">
 <div class="col-1"></div>
-<div class="col-10 noticiascss">
+<div class="col-10">
   <h3>Cuerpo</h3>
     <div class="">
       <app-ngx-editor [config]="config" style="background-color: white;" 
