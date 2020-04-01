@@ -90,7 +90,7 @@ export class CrearRecetaComponent implements OnInit {
 
   subirImagen(){
     
-    this.imageS.uploadImage(this.img, this.nombreImage).subscribe(
+    this.imageS.uploadImage(this.img, this.nombreIcono).subscribe(
       (res) => {
         
       },

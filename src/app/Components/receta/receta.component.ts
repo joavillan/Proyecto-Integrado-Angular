@@ -27,7 +27,7 @@ export class RecetaComponent implements OnInit {
     this.receta.getRecetaById(this.id).subscribe((res)=>{
       console.log(res);
       let dummy:any = res;
-      console.log(dummy);
+      console.log(dummy.img);
       this.recetaPage = dummy;
     },(err)=>{
       console.log(err);
