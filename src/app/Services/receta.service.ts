@@ -12,6 +12,9 @@ export class RecetaService {
   postReceta(receta){
     return this.http.post(URL_API+'recetas',receta)
   }
+  putRecetaById(id, receta){
+    return this.http.put(URL_API+'recetas/'+id,receta)
+  }
   getReceta(){
     return this.http.get(URL_API+'recetas')
   }

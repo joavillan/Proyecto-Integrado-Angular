@@ -13,6 +13,29 @@
                   <h3><b><strong>{{recetaPage.subtitulo}}</strong></b></h3>
                   <br>
                   <p>{{recetaPage.cuerpo}}</p>
+                  <br>
+                  <br>
+                  <h4>Comentarios</h4>
+                  <app-ngx-editor [config]="config" 
+                    [placeholder]="'Añade un mensaje aquí...'" [spellcheck]="true" [(ngModel)]="comentarioDummy">
+                  </app-ngx-editor>
+                  <br>
+                  <button class="btn btn-success" type="button" (click)="Comentar()">Publicar</button>
+                  <div class="container noticiascss" *ngFor="let comen of recetaPage.comentarios; let i = index; ">
+              <br>
+                <div class="row">
+                <div class="col-2"><img src="{{comen.icono}}" class="rounded-circle z-depth-0"
+                  data-toggle="dropdown" alt="avatar image" height="35">
+                </div>
+                <div class="col-6">
+                  <h2>{{comen.nick}}</h2>
+                  <p [(innerHTML)]=comen.cuerpo>
+                </div>
+                <div class="col-4" *ngIf="comen.id == idu || comen.iduser == idu || rol == 'admin'">
+                  <button class="btn btn-danger" type="button" (click)="Eliminar(i)">X</button>
+                </div>
+              </div>
+              </div>
               </div>
             </div>
       </div>

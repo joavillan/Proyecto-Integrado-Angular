@@ -25,7 +25,7 @@ export class SigInComponent implements OnInit {
     let tmp = {
       realm : 'user',
       rol: 'user',
-      icono:'https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png',
+      icono:'https://www.carniceriarivas.com/images/mobile/ico-usuario.png',
       username : this.username,
       password : this.pass1,
       email : this.mail,

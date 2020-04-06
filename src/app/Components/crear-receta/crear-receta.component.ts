@@ -54,11 +54,11 @@ export class CrearRecetaComponent implements OnInit {
     this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
     this.subirImagen();
     let recetaModel={
-      titulo:this.titulo,
+      titulo:this.titulo.replace('<','').replace('>',''),
       subtitulo:this.subtitulo,
       categoria:this.categoria,
       cuerpo:this.cuerpo,
-      img:this.img,
+      img:this.imagename,
       comentarios:[]
     }
     this.receta.postReceta(recetaModel).subscribe((resp)=>{

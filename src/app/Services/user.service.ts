@@ -48,4 +48,12 @@ export class UserService {
        localStorage.setItem('rol',JSON.stringify(datos.rol));
     });
   }
+
+  obtenerUsuario(){
+    let local = JSON.parse(localStorage.getItem('token'));
+    let id = local.userId;
+    let token = local.id;
+    console.log(token);
+    return this.http.get(`${URL_API}users/${id}?access_token=${token}`)
+  }
 }
