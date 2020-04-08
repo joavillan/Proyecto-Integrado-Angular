@@ -32,4 +32,19 @@ export class ListaComponent implements OnInit {
       }
     })
   }
+
+  buscar(args:string){
+    if(args == ''){
+      this.load();
+      this.p = 1;
+    }else{
+    this.receta.search(args).subscribe((res:any)=>{
+      this.recetas = res;
+      this.p = 1;
+    },(err)=>{
+      this.recetas = []
+      alert('¡Vaya!, parece que hemos tenido un problema')
+    })
+    }
+  }
 }

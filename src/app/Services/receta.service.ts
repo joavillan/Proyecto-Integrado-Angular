@@ -21,4 +21,7 @@ export class RecetaService {
   getRecetaById(id){
     return this.http.get(URL_API+`recetas/${id}`)
   }
+  search(param:string){
+    return this.http.get(`${URL_API}Busqueda/${param}`)
+  }
 }

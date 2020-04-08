@@ -38,12 +38,15 @@ export class RecetaComponent implements OnInit {
   comentarioDummy;
   id;
   idu="";
+  rol;
   recetaPage:RecetaModel;
 
   ngOnInit() {
     this.router.params.subscribe(event => {
       this.id = event.id;
     });
+    this.rol = JSON.parse(localStorage.getItem('rol'));
+    console.log(this.rol);
     this.obtenerReceta();
   }
 
@@ -86,6 +89,16 @@ export class RecetaComponent implements OnInit {
       alert('Error al subir comentario: \n'+err.err);
     })
     }); 
+  }
+
+  Eliminar(id){
+    this.recetaPage.comentarios.splice(id,1);
+    this.receta.putRecetaById(this.recetaPage.id,this.recetaPage).subscribe((response)=>{
+      //window.location.reload();
+    },(error)=>{
+      console.log(`error al eliminar comentario`),
+      console.log(this.recetaPage);
+    });
   }
 
 }

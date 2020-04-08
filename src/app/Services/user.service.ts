@@ -38,6 +38,23 @@ export class UserService {
       ); 
   }
 
+  logoutUser(token){
+    console.log(JSON.parse(token).id);
+    this.http.post(`${URL_API}users/logout?access_token=`+JSON.parse(token).id, null).subscribe(
+      (response)=>{
+       
+        localStorage.removeItem('token');
+        localStorage.removeItem('rol');
+        console.log('Sesión cerrada');
+        window.location.reload();
+      },
+      (error) => {
+        console.log('error');
+        localStorage.removeItem('token');
+        window.location.reload();
+    });
+  }
+
   guardarRol(){
     let local = JSON.parse(localStorage.getItem('token'));
     let id = local.userId;
