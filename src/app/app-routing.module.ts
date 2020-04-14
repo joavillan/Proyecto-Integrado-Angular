@@ -7,6 +7,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { ListaComponent } from './Components/lista/lista.component';
 import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.component';
 import { RecetaComponent } from './Components/receta/receta.component';
+import { IsloggedService } from './Services/islogged.service';
 
 
 const routes: Routes = [
@@ -14,9 +15,9 @@ const routes: Routes = [
 },
 { path: 'SigIn', component: SigInComponent
 },
-{ path: 'LogIn', component: LoginComponent
+{ path: 'LogIn', component: LoginComponent, canActivate:[IsloggedService]
 },
-{ path: 'Lista', component: ListaComponent
+{ path: 'Lista', component: ListaComponent, canActivate:[!IsloggedService]
 },
 { path: 'CrearReceta', component: CrearRecetaComponent
 },
