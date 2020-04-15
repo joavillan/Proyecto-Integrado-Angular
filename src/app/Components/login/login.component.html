@@ -1,3 +1,4 @@
+<!--
 <br>
 <br>
 <div class="container">
@@ -27,5 +28,36 @@
       </form>
     </div>
     <div class="col-1"></div>
+  </div>
+</div>
+-->
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <!-- Default form login -->
+      <form class="text-center border border-light p-5" action="#!">
+
+        <p class="h4 mb-4">Logueate</p>
+
+        <!-- User -->
+        <input type="text" id="defaultLoginFormEmail" class="form-control" [(ngModel)]="user.username" [ngModelOptions]="{standalone: true}" placeholder="Nombre de usuraio">
+        <br>
+        <!-- Password -->
+        <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" placeholder="Contraseña">
+        <br>
+        <!-- Sign in button -->
+        <button class="btn btn-info btn-block my-4" type="submit" (click)='submit()'>¡Entrar!</button>
+
+        <!-- Register -->
+        <p>¿Todavía no eres un verdadero chef? 
+            <a routerLink="/SigIn">Únete</a>
+        </p>
+
+      </form>
+      <!-- Default form login -->
+    </div>
+    <div class="col-lg-2"></div>
   </div>
 </div>

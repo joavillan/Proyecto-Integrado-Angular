@@ -27,9 +27,11 @@ export class ListaComponent implements OnInit {
 
   load(){
     this.receta.getReceta().subscribe((res:any)=>{
-      for(let re of res){
+      /*for(let re of res){
         this.recetas.push(re);
-      }
+      }*/
+      this.recetas = res;
+      this.recetas.reverse();
     })
   }
 

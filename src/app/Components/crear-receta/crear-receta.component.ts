@@ -23,6 +23,7 @@ export class CrearRecetaComponent implements OnInit {
   nombreImage="";
   file;
   ext="";
+  visible:boolean=false;
   config = {
     "editable": true,
     "spellcheck": true,
@@ -46,6 +47,7 @@ export class CrearRecetaComponent implements OnInit {
   };
 
   ngOnInit() {
+    console.log(this.visible);
   }
 
   subirReceta(){

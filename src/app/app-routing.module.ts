@@ -17,7 +17,7 @@ const routes: Routes = [
 },
 { path: 'LogIn', component: LoginComponent, canActivate:[IsloggedService]
 },
-{ path: 'Lista', component: ListaComponent, canActivate:[!IsloggedService]
+{ path: 'Lista', component: ListaComponent
 },
 { path: 'CrearReceta', component: CrearRecetaComponent
 },

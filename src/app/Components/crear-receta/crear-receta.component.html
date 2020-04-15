@@ -1,4 +1,4 @@
-<br>
+<!--<br>
 <div class="col">
 <div class="row">
   <div class="col-1"></div>
@@ -40,7 +40,85 @@
         [placeholder]="'Añade un mensaje aquí...'" [spellcheck]="true" [(ngModel)]="cuerpo">
       </app-ngx-editor>
     </div>
-    <button class="btn btn-primary" (click)="subirReceta()"type="button">Publicar Receta</button>
+    <button class="btn btn-primary" (click)="subirReceta()"type="button">Publicar Receta</button> 
+    <button class="btn btn-success" type="button" (click)="this.visible = !this.visible">Previsualizar</button>
+    <div class="row">
+      <div *ngIf="this.visible">
+        <p>a</p>
+      </div>
+    </div>
 </div>
 <div class="col-1"></div>
+</div>
+-->
+<br>
+<div class="container">
+
+  <!-- Titulo -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1><b>Crear Receta</b></h1>
+    </div>
+  </div>
+  <br>
+
+  <!-- Formulario -->
+  <div class="row">
+    <div class="col-lg-3">
+      <h3 class="">Titulo</h3>
+      <input type="text" placeholder="Un titulo ..."[(ngModel)]="titulo"/>
+    </div>
+    <div class="col-lg-3">
+      <h3 class="">Subtitulo</h3>
+      <input type="text" placeholder="Un subtitulo ..."[(ngModel)]="subtitulo"/>
+    </div>
+  </div>
+  <br>
+
+  <!-- Imagen -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h3 class="">Imagen</h3>
+      <div class="input-group mb-3">
+        <div class="custom-file">
+          <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02" (change)="handleFileSelect($event)">>
+          <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Categoría -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Categoría</h3>
+      <select name="categoria"  id="cat" [(ngModel)]="categoria">
+        <option selected>Comidas</option>
+        <option>Postres</option>
+      </select>
+    </div>
+  </div>
+  <br>
+
+  <!-- Cuerpo -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h3>Cuerpo</h3>
+      <div>
+      <app-ngx-editor [config]="config" style="background-color: white;" 
+        [placeholder]="'Añade un mensaje aquí...'" [spellcheck]="true" [(ngModel)]="cuerpo">
+      </app-ngx-editor>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Botones -->
+  <div class="row">
+    <div class="col-lg-12">
+      <button class="btn btn-primary" (click)="subirReceta()"type="button">Publicar Receta</button> 
+      <button class="btn btn-success" type="button" (click)="this.visible = !this.visible">Previsualizar</button>
+    </div>
+  </div>
 </div>
