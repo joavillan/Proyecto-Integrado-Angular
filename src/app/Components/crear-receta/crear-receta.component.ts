@@ -3,6 +3,8 @@ import { RecetaService } from 'src/app/Services/receta.service';
 import { Router } from '@angular/router';
 import { ImageService } from 'src/app/Services/image.service';
 import { URL_API } from 'src/app/Cons/cons';
+import Swal from 'sweetalert2'
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-crear-receta',
@@ -13,7 +15,7 @@ export class CrearRecetaComponent implements OnInit {
   imagename: string;
   nombreIcono: string;
 
-  constructor(private receta:RecetaService, private imageS:ImageService, private router:Router) { }
+  constructor(private receta:RecetaService, private sanitizer:DomSanitizer, private imageS:ImageService, private router:Router) { }
 
   titulo="";
   subtitulo=""
@@ -64,7 +66,12 @@ export class CrearRecetaComponent implements OnInit {
       comentarios:[]
     }
     this.receta.postReceta(recetaModel).subscribe((resp)=>{
-      alert('Receta creada');
+      Swal.fire(
+        '¡Receta creada!',
+        'Pulsa OK para continuar cocinando',
+        'success'
+      )
+      //alert('Receta creada');
     },(err)=>{
       alert('Error al crear la receta: \n'+err);
     });
