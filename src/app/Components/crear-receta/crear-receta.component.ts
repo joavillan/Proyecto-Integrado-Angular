@@ -21,6 +21,8 @@ export class CrearRecetaComponent implements OnInit {
   subtitulo=""
   categoria="Comidas";
   cuerpo="";
+  fecha;
+  mg=0;
   img="";
   nombreImage="";
   file;
@@ -57,13 +59,20 @@ export class CrearRecetaComponent implements OnInit {
     this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}Img`+'.'+this.ext;
     this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
     this.subirImagen();
+    let f:Date = new Date();
+    let fe = f.getDay()+'/'+f.getMonth()+'/'+f.getUTCFullYear();
+    this.fecha = fe;
+    console.log(this.fecha);
     let recetaModel={
       titulo:this.titulo.replace('<','').replace('>',''),
       subtitulo:this.subtitulo,
       categoria:this.categoria,
       cuerpo:this.cuerpo,
       img:this.imagename,
-      comentarios:[]
+      comentarios:[],
+      fecha:this.fecha,
+      mg:this.mg,
+      mgs:[]
     }
     this.receta.postReceta(recetaModel).subscribe((resp)=>{
       Swal.fire(
