@@ -10,8 +10,9 @@ export class RecetaModel{
     fecha:string;
     mg:number;
     mgs:[{}];
+    ncomen:number;
 
-    constructor(id,titulo,subtitulo,userId,categoria,cuerpo,comentarios?,img?,fecha?,mg?,mgs?){
+    constructor(id,titulo,subtitulo,userId,categoria,cuerpo,comentarios?,img?,fecha?,mg?,mgs?,ncomen?){
         this.id = id;
         this.titulo=titulo;
         this.subtitulo=subtitulo;
@@ -23,6 +24,7 @@ export class RecetaModel{
         this.fecha=fecha;
         this.mg=mg;
         this.mgs=mgs;
+        this.ncomen=ncomen;
     }
 
 }

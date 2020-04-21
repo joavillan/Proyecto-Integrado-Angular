@@ -30,13 +30,6 @@ export class ListaComponent implements OnInit {
 
   load(){
     this.receta.getReceta().subscribe((res:any)=>{
-      /*let f:string;
-      for(let re of res){
-        
-      }
-      for(let receta of this.recetas){
-        f = receta.fecha.getDay+'/'+receta.fecha.getMonth+'/'+receta.fecha.getUTCFullYear
-      }*/
       this.recetas = res;
       this.recetas.reverse();
     })

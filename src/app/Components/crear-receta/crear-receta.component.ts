@@ -23,6 +23,7 @@ export class CrearRecetaComponent implements OnInit {
   cuerpo="";
   fecha;
   mg=0;
+  ncomen=0;
   img="";
   nombreImage="";
   file;
@@ -72,7 +73,8 @@ export class CrearRecetaComponent implements OnInit {
       comentarios:[],
       fecha:this.fecha,
       mg:this.mg,
-      mgs:[]
+      mgs:[],
+      ncomen:this.ncomen
     }
     this.receta.postReceta(recetaModel).subscribe((resp)=>{
       Swal.fire(

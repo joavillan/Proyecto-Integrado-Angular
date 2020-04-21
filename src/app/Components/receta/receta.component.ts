@@ -82,6 +82,7 @@ export class RecetaComponent implements OnInit {
         'icono':icono,
         'cuerpo':this.comentarioDummy
       }
+      this.recetaPage.ncomen++;
       this.recetaPage.comentarios.push(dummy);
     this.receta.putRecetaById(this.id,this.recetaPage).subscribe((res)=>{
       alert('¡Comentario subido!');
