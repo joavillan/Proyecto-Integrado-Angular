@@ -11,7 +11,12 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class RecetaComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService) { }
+  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService) {
+    if(JSON.parse(localStorage.getItem('token'))!=null){
+      this.idu = JSON.parse(localStorage.getItem('token')).userId;
+      console.log(this.idu);
+    }
+   }
 
   config = {
     "editable": true,
@@ -77,7 +82,7 @@ export class RecetaComponent implements OnInit {
       nick = datos.username;
       console.log(this.comentarioDummy);
       let dummy = {
-        'iduser':this.idu,
+        'userId':this.idu,
         'nick': nick,
         'icono':icono,
         'cuerpo':this.comentarioDummy
@@ -94,6 +99,7 @@ export class RecetaComponent implements OnInit {
 
   Eliminar(id){
     this.recetaPage.comentarios.splice(id,1);
+    this.recetaPage.ncomen--;
     this.receta.putRecetaById(this.recetaPage.id,this.recetaPage).subscribe((response)=>{
       //window.location.reload();
     },(error)=>{

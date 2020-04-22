@@ -23,6 +23,7 @@ export class ListaComponent implements OnInit {
   searchArgs:string;
   tpp = 10;
   recetaPage:RecetaModel;
+  likeado:boolean;
 
   ngOnInit() {
     this.load();
@@ -61,15 +62,43 @@ export class ListaComponent implements OnInit {
     },(err)=>{
       alert('Error al obtener usuario');
     })*/
-    console.log(this.recetas);
+    //console.log(this.recetas);
+
+    let u = JSON.parse(localStorage.getItem('token'));
+    let idUsu:string = u.userId;
+    let i = -1;
+    let ya:boolean = false;
+
     for (let r of this.recetas) {
       if (r.id == id) {
-        let u = JSON.parse(localStorage.getItem('token'));
-        let idUsu:string = u.userId;
+        for (let m of r.mgs) {
+          //console.log(m);
+          i++;
+          if (m == idUsu) {
+            console.log(r.mg);
+            r.mg--;
+            console.log(r.mg);
+            console.log('Hola holita vecinito');
+            //console.log(r.mgs[i]);
+            r.mgs.splice(i,1);
+            ya = true;
+            console.log(ya)
+          }
+        }
+        this.receta.putRecetaById(r.id,r).subscribe((response)=>{
+          //window.location.reload();
+        },(error)=>{
+          console.log(`error con el mg`);
+        });
+      }
+    }
+    for (let r of this.recetas) {
+      if (r.id == id && ya != true) {
         console.log(u.userId);
         console.log(idUsu);
         r.mg++;
         r.mgs.push(idUsu);
+        ya = true;
         this.receta.putRecetaById(r.id,r).subscribe((response)=>{
           //window.location.reload();
         },(error)=>{

@@ -86,27 +86,31 @@
     </div>
   </div>
   <br>
-
+  
   <div *ngFor="let comen of recetaPage.comentarios; let i = index; ">
+    <hr>
     <div class="row">
       <div class="col-lg-1">
         <img src="{{comen.icono}}" class="rounded-circle z-depth-0"
         data-toggle="dropdown" alt="avatar image" height="35">
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-11">
         <h3>{{comen.nick}}</h3>
       </div>
-      <div class="col-lg-2" *ngIf="comen.id == idu || comen.iduser == idu || rol == 'admin'">
-        <button class="btn btn-danger" type="button" (click)="Eliminar(i)">X</button>
-      </div>
+      
     </div>
     <br>
     
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-9">
         <p [(innerHTML)]=comen.cuerpo>
       </div>
+      <div class="col-lg-2" *ngIf="comen.id == idu || comen.userId == idu || rol == 'admin'">
+        <button class="btn btn-danger" type="button" (click)="Eliminar(i)">Eliminar</button>
+      </div>
     </div>
+    <hr>
   </div>
-
+  
 </div>
