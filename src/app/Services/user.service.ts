@@ -24,8 +24,12 @@ export class UserService {
       alert('Error, por favor asegurese de que los datos introducidos son válidos'));
   }
 
+  findOne(user){
+    return this.http.get(URL_API+'users/findOne',user);
+  }
+
   patchUserById(id, user){
-    return this.http.patch(URL_API+'users/'+id,user)
+    return this.http.patch(URL_API+'users/'+id,user);
   }
 
   loginUser(user){
@@ -74,6 +78,7 @@ export class UserService {
 
   obtenerUsuario(){
     let local = JSON.parse(localStorage.getItem('token'));
+    console.log(JSON.parse(localStorage.getItem('token')));
     let id = local.userId;
     let token = local.id;
     console.log(token);

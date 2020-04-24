@@ -14,12 +14,14 @@ export class LoginComponent implements OnInit {
     password:''
   }
 
+  verificar={where:{username:this.user.username}}
+
   constructor(private userService:UserService,private router:Router) { }
 
   ngOnInit() {
-    /*if(localStorage.getItem('token')!=null){
+    if(localStorage.getItem('token')!=null){
       this.router.navigate(['/Home']);
-    }*/
+    }
   }
 
   submit(){
