@@ -13,11 +13,12 @@ export class VerifyComponent implements OnInit {
   constructor(private user:UserService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    let datos;
-    let nick;
-    let icono;
-    let emailId = this.route.snapshot.paramMap.get("id")
-    this.user.obtenerUsuario().subscribe((data)=>{
+    let emailId = this.route.snapshot.paramMap.get("id");
+    let ver = {
+      emailVerified : true
+    }
+    this.user.patchUserById(emailId, ver).subscribe();
+    /*this.user.obtenerUsuario().subscribe((data)=>{
       let tmp = {
         realm : datos.realm,
         rol: datos.rol,
@@ -27,11 +28,11 @@ export class VerifyComponent implements OnInit {
         email : datos.email,
         emailVerified : true
       }
-      this.user.putUserById(emailId, tmp).subscribe((res)=>{
+      this.user.patchUserById(emailId, tmp).subscribe((res)=>{
         alert('¡Verificado!');
       },(err)=>{
         alert('Error');
       })
-  })
+  })*/
   }
 }

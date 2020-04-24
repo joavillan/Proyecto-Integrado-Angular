@@ -24,8 +24,8 @@ export class UserService {
       alert('Error, por favor asegurese de que los datos introducidos son válidos'));
   }
 
-  putUserById(id, user){
-    return this.http.put(URL_API+'users/'+id,user)
+  patchUserById(id, user){
+    return this.http.patch(URL_API+'users/'+id,user)
   }
 
   loginUser(user){
