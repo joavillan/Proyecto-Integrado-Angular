@@ -8,6 +8,7 @@ import { ListaComponent } from './Components/lista/lista.component';
 import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.component';
 import { RecetaComponent } from './Components/receta/receta.component';
 import { IsloggedService } from './Services/islogged.service';
+import { VerifyComponent } from './Components/verify/verify.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
 { path: 'CrearReceta', component: CrearRecetaComponent
 },
 { path: 'Lista/:id', component: RecetaComponent
+},
+{ path: 'Verify/:id', component: VerifyComponent
 },
 {path: '', redirectTo: '/Home',pathMatch: 'full'},
 {

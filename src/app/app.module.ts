@@ -15,6 +15,7 @@ import { ListaComponent } from './Components/lista/lista.component';
 import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.component';
 import { RecetaComponent } from './Components/receta/receta.component';
 import { SafePipe } from './Pipes/safePipe';
+import { VerifyComponent } from './Components/verify/verify.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SafePipe } from './Pipes/safePipe';
     ListaComponent,
     CrearRecetaComponent,
     SafePipe,
-    RecetaComponent
+    RecetaComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,

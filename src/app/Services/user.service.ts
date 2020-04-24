@@ -12,14 +12,20 @@ export class UserService {
   postUser(data:{}){
     let a:any = data;
     this.http.post(`${URL_API}users`,data).subscribe(
-      (response)=>{
+      (response:any)=>{
         /*if(a.rol == 'user'){
         //this.loginUser(data);
         }*/
         console.log('okay');
+        console.log(response);
+        this.http.post('http://127.0.0.1:5000/',{'email':response.email, 'emailId':response.id}).subscribe();
         alert('¡Usuario Creado!')
     },(error) =>
       alert('Error, por favor asegurese de que los datos introducidos son válidos'));
+  }
+
+  putUserById(id, user){
+    return this.http.put(URL_API+'users/'+id,user)
   }
 
   loginUser(user){

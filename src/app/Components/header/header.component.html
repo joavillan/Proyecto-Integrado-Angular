@@ -35,14 +35,49 @@
         </li>
   
       </ul>
+
       <!-- Links -->
-  
       <form class="form-inline">
         <div class="md-form my-0">
           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         </div>
       </form>
     </div>
+
+    <!-- Icono -->
+    <div [ngSwitch]="logged">
+      <div *ngSwitchCase="false">
+        <span class="navbar-text">
+          <a routerLink="/LogIn" routerLinkActive="active">
+            <button class="btn btn-sm align-middle btn-sm-primary" type="button">Inicia Sesion</button>
+          </a>
+        </span>
+      </div>
+      <div *ngSwitchCase="true">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+          <li class="nav-item avatar">
+            <!--<a class="nav-link p-0" href="/User">
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                alt="avatar image" height="35">
+            </a>-->
+            <div class="dropdown derecha">
+            <img src="{{icono}}" class="rounded-circle z-depth-0"
+                data-toggle="dropdown" alt="avatar image" height="35">
+            <div class="dropdown-menu dropdown-primary dropdown-menu-right dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink">
+              <!--<a class="dropdown-item" href="CrearPost" >Crear Post</a>-->
+                <div *ngIf='rol == "admin"'>
+                  <a class="dropdown-item" href="/CrearReceta" >Publicar receta</a>
+                  <!--<a class="dropdown-item" href="CrearAdmin" >Crear admin</a>-->
+                </div>
+                <a class="dropdown-item" href="/Settings">Ajustes</a>
+                <a class="dropdown-item" (click)='logout()'>Cerrar sesión</a>
+            </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <!-- Collapsible content -->
   
   </nav>
