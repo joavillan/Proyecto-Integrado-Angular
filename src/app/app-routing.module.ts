@@ -9,6 +9,7 @@ import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.com
 import { RecetaComponent } from './Components/receta/receta.component';
 import { IsloggedService } from './Services/islogged.service';
 import { VerifyComponent } from './Components/verify/verify.component';
+import { SettingsComponent } from './Components/settings/settings.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,8 @@ const routes: Routes = [
 { path: 'CrearReceta', component: CrearRecetaComponent
 },
 { path: 'Lista/:id', component: RecetaComponent
+},
+{ path: 'Settings', component: SettingsComponent
 },
 { path: 'Verify/:id', component: VerifyComponent
 },

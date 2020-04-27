@@ -32,6 +32,5 @@ export class SigInComponent implements OnInit {
       emailVerified : false
     }
     this.userservice.postUser(tmp);
-    
   }
 }

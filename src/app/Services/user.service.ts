@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_API } from '../Cons/cons';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,32 @@ export class UserService {
         console.log('okay');
         console.log(response);
         this.http.post('http://127.0.0.1:5000/',{'email':response.email, 'emailId':response.id}).subscribe();
-        alert('¡Usuario Creado!')
-    },(error) =>
-      alert('Error, por favor asegurese de que los datos introducidos son válidos'));
+        //alert('¡Usuario Creado!')
+        Swal.fire(
+          'Usuario creado',
+          'Revise tu correo para verificar el usuario',
+          'success'
+        )
+    },(error) =>{
+      Swal.fire(
+        'Usuario no creado',
+        'Revise que todos los datos sean correctos. Puede ser que ya haya una cuenta con ese usuario o correo electrónico',
+        'error'
+      );
+    })
+      //alert('Error, por favor asegurese de que los datos introducidos son válidos'));
+      
+  }
+
+  putUser(data:{}){
+    let local = JSON.parse(localStorage.getItem('token'));
+    let id = local.userId;
+    let token = local.id;
+    this.http.put(`${URL_API}users/${id}?access_token=${token}`,data).subscribe(
+      (response)=>{
+        console.log('usuario modificado: ',data);
+      }
+    );
   }
 
   findOne(user){
@@ -83,5 +107,13 @@ export class UserService {
     let token = local.id;
     console.log(token);
     return this.http.get(`${URL_API}users/${id}?access_token=${token}`)
+  }
+
+  changePassword(newpass,oldpass){
+    let local = JSON.parse(localStorage.getItem('token'));
+    let token = local.id;
+    return this.http.post(`${URL_API}users/change-password?access_token=${token}`,{
+      'newPassword':newpass,
+      'oldPassword':oldpass});
   }
 }

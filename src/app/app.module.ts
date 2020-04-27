@@ -16,6 +16,7 @@ import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.com
 import { RecetaComponent } from './Components/receta/receta.component';
 import { SafePipe } from './Pipes/safePipe';
 import { VerifyComponent } from './Components/verify/verify.component';
+import { SettingsComponent } from './Components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { VerifyComponent } from './Components/verify/verify.component';
     CrearRecetaComponent,
     SafePipe,
     RecetaComponent,
-    VerifyComponent
+    VerifyComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

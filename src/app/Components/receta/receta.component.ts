@@ -3,6 +3,7 @@ import { RecetaService } from 'src/app/Services/receta.service';
 import { RecetaModel } from 'src/app/Models/RecetaModel';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-receta',
@@ -90,22 +91,59 @@ export class RecetaComponent implements OnInit {
       this.recetaPage.ncomen++;
       this.recetaPage.comentarios.push(dummy);
     this.receta.putRecetaById(this.id,this.recetaPage).subscribe((res)=>{
-      alert('¡Comentario subido!');
+      //alert('¡Comentario subido!');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: '¡Comentario subido!',
+        showConfirmButton: false,
+        timer: 1500
+      })
     },(err)=>{
-      alert('Error al subir comentario: \n'+err.err);
+      //alert('Error al subir comentario: \n'+err.err);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: '¡Error! comentario no subido',
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
     }); 
   }
 
   Eliminar(id){
-    this.recetaPage.comentarios.splice(id,1);
-    this.recetaPage.ncomen--;
-    this.receta.putRecetaById(this.recetaPage.id,this.recetaPage).subscribe((response)=>{
-      //window.location.reload();
-    },(error)=>{
-      console.log(`error al eliminar comentario`),
-      console.log(this.recetaPage);
-    });
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Si lo eliminas no podrás recuperarlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Sí! borrar',
+      cancelButtonText: 'No, mejor no'
+    }).then((result) => {
+      if (result.value) {
+        this.recetaPage.comentarios.splice(id,1);
+        this.recetaPage.ncomen--;
+        this.receta.putRecetaById(this.recetaPage.id,this.recetaPage).subscribe((response)=>{
+          //window.location.reload();
+          Swal.fire(
+            '¡Borrado!',
+            'Tu comentario ha sido borrado',
+            'success'
+          )
+        },(error)=>{
+          /*console.log(`error al eliminar comentario`),
+          console.log(this.recetaPage);*/
+          Swal.fire(
+            '¡Error!',
+            'Tu comentario no ha sido borrado',
+            'error'
+          )
+        });
+      }
+    })
   }
 
 }

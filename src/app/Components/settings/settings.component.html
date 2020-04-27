@@ -1,0 +1,127 @@
+<!--<br>
+<div class="col">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 noticiascss">
+            <h1><b>Ajustes de usuario</b></h1>
+            <h4>¡Modifica el perfil a tu gusto!</h4>
+            <br>
+            <br>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5 noticiascss">
+            <h5><b>Cambia tu contraseña</b></h5>
+            <h6>¿Tan jakiado? ¡Cambia tu contraseña y aumenta tu seguridad!</h6>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="antpass" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Tu contraseña</label>
+            </div>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="newpass1" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Nueva contraseña</label>
+            </div>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="newpass2" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Repita la contraseña</label>
+            </div>
+            <button type="button" (click)="cambiarPassword()" class="btn btn-elegant">Cambiar!</button>
+            <br>
+            <br>
+        </div>
+        <div class="col-5 noticiascss">
+            <h5><b>Cambiar Icono</b></h5>
+            <h6>¿Cambia tu foto para estar más guapo que nunca!</h6>
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01" (click)="cambiarImagen()">Nuevo look!</span>
+                </div>
+                <div class="custom-file">
+                    <input #imageInput accept="image/*" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01" (change)="handleFileSelect($event)">
+                    <label class="custom-file-label" for="inputGroupFile01"></label>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 noticiascss">
+            <h5><b>Contáctanos</b></h5>
+            <h6><b>Ubicación: </b>Calle Sta. María Mazzarello, 1, 41005 Sevilla</h6>
+            <h6><b>Teléfono: </b>954 63 23 47</h6>
+            <h6><b>Email: </b>proyectointegradocw@gmail.com</h6>
+            <br>
+            <br>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>-->
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Ajustes de usuario</h1>
+            <h4>Edita tu perfil de cociner@</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <br>
+            <h5><b>Cambiar contraseña</b></h5>
+            <h6>Si has notado algo raro en tu perfil hazlo</h6>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="antpass" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Tu contraseña</label>
+            </div>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="newpass1" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Nueva contraseña</label>
+            </div>
+            <div class="md-form">
+                <i class="fas fa-lock prefix"></i>
+                <input [(ngModel)]="newpass2" type="password" id="inputValidationEx2" class="form-control validate">
+                <label for="inputValidationEx2" data-error="wrong" data-success="right">Repita la contraseña</label>
+            </div>
+            <button type="button" (click)="cambiarPassword()" class="btn btn-elegant">Cambiar!</button>
+            <br>
+        </div>
+        <div class="col-lg-6">
+            <br>
+            <h5><b>Cambiar Icono</b></h5>
+            <h6>¿Te apetece cambiar?¡Ponte más guap@ que nunca!</h6>
+            <br>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01" (click)="cambiarImagen()">Nuevo look!</span>
+                </div>
+                <div class="custom-file">
+                    <input #imageInput accept="image/*" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01" (change)="handleFileSelect($event)">
+                    <label class="custom-file-label" for="inputGroupFile01"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <br>
+            <h5><b>Contáctanos</b></h5>
+            <h6><b>Ubicación: </b>Calle Sta. María Mazzarello, 1, 41005 Sevilla</h6>
+            <h6><b>Teléfono: </b>954 63 23 47</h6>
+            <h6><b>Email: </b>proyectointegradocw@gmail.com</h6>
+            <br>
+        </div> 
+    </div>
+</div>
