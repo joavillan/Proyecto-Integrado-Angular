@@ -13,5 +13,9 @@ export class ImageService {
     console.log(image, name);
     return this.http.post(`${URL_API}/images/FileUpload`,{file:image,name:name});
   }
+
+  removeImageById(file){
+    return this.http.post(`${URL_API}/images/FileUnlink`,{file:file});
+  }
   
 }

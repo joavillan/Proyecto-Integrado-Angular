@@ -4,6 +4,7 @@ import { RecetaModel } from 'src/app/Models/RecetaModel';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
+import { ImageService } from 'src/app/Services/image.service';
 
 @Component({
   selector: 'app-receta',
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class RecetaComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService) {
+  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService, private image:ImageService) {
     if(JSON.parse(localStorage.getItem('token'))!=null){
       this.idu = JSON.parse(localStorage.getItem('token')).userId;
       console.log(this.idu);
@@ -64,6 +65,7 @@ export class RecetaComponent implements OnInit {
       let dummy:any = res;
       console.log(dummy.img);
       this.recetaPage = dummy;
+      console.log(this.recetaPage.img);
     },(err)=>{
       console.log(err);
       alert('Ha ocurrido un error al obtener el post: \n'+err.err)
@@ -71,6 +73,7 @@ export class RecetaComponent implements OnInit {
   }
 
   eliminarReceta() {
+    let nom;
     Swal.fire({
       title: '¿Estás seguro?',
       text: "Si lo eliminas no podrás recuperarlo",
@@ -84,6 +87,9 @@ export class RecetaComponent implements OnInit {
       if (result.value) {
         this.receta.removeRecetaById(this.recetaPage.id).subscribe((response)=>{
           //window.location.reload();
+          nom = this.recetaPage.img.slice((this.recetaPage.img.lastIndexOf("/") - 1 >>> 0) + 2);
+          console.log(nom);
+          this.image.removeImageById(nom).subscribe();
           Swal.fire(
             '¡Borrado!',
             'Esta receta ha sido borrada',
