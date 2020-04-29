@@ -137,4 +137,35 @@
       <button class="btn btn-success" type="button" (click)="this.visible = !this.visible">Previsualizar</button>
     </div>
   </div>
+  
+  <!-- Titulo -->
+  <div class="row" *ngIf="this.visible==true">
+    <div class="col-lg-12">
+      <br>
+      <hr>
+      <br>
+      <h1><b>{{titulo}}</b></h1>
+    </div>
+  </div>
+  <br>
+  
+  <!-- Subitulo -->
+  <div class="row" *ngIf="this.visible==true">
+    <div class="col-lg-12">
+      <h3>{{subtitulo}}</h3>
+    </div>
+  </div>
+  <br>
+
+  <!-- Cuerpo -->
+  <div class="row" *ngIf="this.visible==true">
+    <div class="col-lg-12">
+      <p [innerHTML]="cuerpo | safe: 'html'"></p>
+      <!--<p>{{recetaPage.cuerpo}}</p>-->
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
+
 </div>

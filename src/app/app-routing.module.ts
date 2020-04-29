@@ -14,26 +14,26 @@ import { SettingsComponent } from './Components/settings/settings.component';
 
 const routes: Routes = [
   { path: 'Home', component: HomeComponent
-},
-{ path: 'SigIn', component: SigInComponent
-},
-{ path: 'LogIn', component: LoginComponent, canActivate:[IsloggedService]
-},
-{ path: 'Lista', component: ListaComponent
-},
-{ path: 'CrearReceta', component: CrearRecetaComponent
-},
-{ path: 'Lista/:id', component: RecetaComponent
-},
-{ path: 'Settings', component: SettingsComponent
-},
-{ path: 'Verify/:id', component: VerifyComponent
-},
-{path: '', redirectTo: '/Home',pathMatch: 'full'},
-{
-  path        : '**',
-  pathMatch   : 'full',
-  component   : HomeComponent}
+  },
+  { path: 'SigIn', component: SigInComponent
+  },
+  { path: 'LogIn', component: LoginComponent, canActivate:[IsloggedService]
+  },
+  { path: 'Lista', component: ListaComponent
+  },
+  { path: 'CrearReceta', component: CrearRecetaComponent
+  },
+  { path: 'Lista/:id', component: RecetaComponent
+  },
+  { path: 'Settings', component: SettingsComponent
+  },
+  { path: 'Verify/:id', component: VerifyComponent
+  },
+  {path: '', redirectTo: '/Home',pathMatch: 'full'},
+  {
+    path        : '**',
+    pathMatch   : 'full',
+    component   : HomeComponent}
 ];
 
 @NgModule({

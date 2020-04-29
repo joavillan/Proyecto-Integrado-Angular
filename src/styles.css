@@ -2,3 +2,7 @@
 .fondo{
     background-image: url("https://previews.123rf.com/images/hatza/hatza1108/hatza110800006/10191855-comida-y-bebida-patr%C3%B3n-transparente.jpg");
 }
+
+.texto{
+    overflow-wrap: break-word;
+}

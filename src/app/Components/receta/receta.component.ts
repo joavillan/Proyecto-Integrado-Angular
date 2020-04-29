@@ -26,6 +26,7 @@ export class RecetaComponent implements OnInit {
     "minHeight": "250",
     "width": "auto",
     "minWidth": "0",
+    "maxWidth": "250",
     "translate": "yes",
     "enableToolbar": true,
     "showToolbar": true,
@@ -69,6 +70,38 @@ export class RecetaComponent implements OnInit {
     })
   }
 
+  eliminarReceta() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Si lo eliminas no podrás recuperarlo",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Sí! borrar',
+      cancelButtonText: 'No, mejor no'
+    }).then((result) => {
+      if (result.value) {
+        this.receta.removeRecetaById(this.recetaPage.id).subscribe((response)=>{
+          //window.location.reload();
+          Swal.fire(
+            '¡Borrado!',
+            'Esta receta ha sido borrada',
+            'success'
+          )
+        },(error)=>{
+          /*console.log(`error al eliminar comentario`),
+          console.log(this.recetaPage);*/
+          Swal.fire(
+            '¡Error!',
+            'Tu comentario no ha sido borrado',
+            'error'
+          )
+        });
+      }
+    })
+  }
+
   Comentar(){
     let datos;
     let nick;
@@ -88,27 +121,38 @@ export class RecetaComponent implements OnInit {
         'icono':icono,
         'cuerpo':this.comentarioDummy
       }
+    if (this.comentarioDummy != '') {
       this.recetaPage.ncomen++;
       this.recetaPage.comentarios.push(dummy);
-    this.receta.putRecetaById(this.id,this.recetaPage).subscribe((res)=>{
-      //alert('¡Comentario subido!');
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '¡Comentario subido!',
-        showConfirmButton: false,
-        timer: 1500
+      this.receta.putRecetaById(this.id,this.recetaPage).subscribe((res)=>{
+        //alert('¡Comentario subido!');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: '¡Comentario subido!',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.comentarioDummy = '';
+      },(err)=>{
+        //alert('Error al subir comentario: \n'+err.err);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: '¡Error! comentario no subido',
+          showConfirmButton: false,
+          timer: 1500
+        })
       })
-    },(err)=>{
-      //alert('Error al subir comentario: \n'+err.err);
+    } else {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
-        title: '¡Error! comentario no subido',
+        title: '¡Necesitas escribir algo!',
         showConfirmButton: false,
         timer: 1500
       })
-    })
+    }
     }); 
   }
 

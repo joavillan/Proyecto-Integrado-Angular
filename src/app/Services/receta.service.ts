@@ -24,4 +24,7 @@ export class RecetaService {
   search(param:string){
     return this.http.get(`${URL_API}Busqueda/${param}`)
   }
+  removeRecetaById(id){
+    return this.http.delete(URL_API+`recetas/${id}`)
+  }
 }

@@ -47,8 +47,11 @@
 
   <!-- Titulo -->
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-10">
       <h1><b>{{recetaPage.titulo}}</b></h1>
+    </div>
+    <div class="col-lg-2" *ngIf="rol == 'admin'">
+      <button class="btn btn-danger" type="button" (click)="eliminarReceta()">Eliminar</button>
     </div>
   </div>
   <br>
@@ -69,13 +72,16 @@
     </div>
   </div>
   <br>
+  <hr>
+  <br>
 
   <!-- Comentarios -->
   <div class="row">
     <div class="col-lg-12">
-      <h4>Comentarios</h4>
+      <h4><b>Comentarios</b></h4>
+      <br>
     </div>
-    <app-ngx-editor [config]="config" 
+    <app-ngx-editor class="texto" [config]="config" 
       [placeholder]="'Añade un mensaje aquí...'" [spellcheck]="true" [(ngModel)]="comentarioDummy">
     </app-ngx-editor>
   </div>
@@ -104,7 +110,7 @@
     <div class="row">
       <div class="col-lg-1"></div>
       <div class="col-lg-9">
-        <p [(innerHTML)]=comen.cuerpo>
+        <p class="texto" [(innerHTML)]=comen.cuerpo>
       </div>
       <div class="col-lg-2" *ngIf="comen.id == idu || comen.userId == idu || rol == 'admin'">
         <button class="btn btn-danger" type="button" (click)="Eliminar(i)">Eliminar</button>
