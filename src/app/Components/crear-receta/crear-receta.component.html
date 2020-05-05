@@ -57,7 +57,8 @@
   <!-- Titulo -->
   <div class="row">
     <div class="col-lg-12">
-      <h1><b>Crear Receta</b></h1>
+      <h1 *ngIf = 'this.editar == false'><b>Crear Receta</b></h1>
+      <h1 *ngIf = 'this.editar == true'><b>Editar Receta</b></h1>
     </div>
   </div>
   <br>
@@ -68,19 +69,25 @@
       <h3 class="">Titulo</h3>
       <!--<input type="text" placeholder="Un titulo ..."[(ngModel)]="titulo"/>-->
       <!-- Material input -->
-      <div class="md-form">
+      <div class="md-form mt-0">
+        <input class="form-control" type="text" placeholder="Titulo" aria-label="Search" [(ngModel)]="titulo">
+      </div>
+      <!--<div class="md-form">
         <input type="text" id="form1" class="form-control" [(ngModel)]="titulo">
         <label for="form1">Titulo</label>
-      </div>
+      </div>-->
     </div>
     <div class="col-lg-3">
       <h3 class="">Subtitulo</h3>
       <!--<input type="text" placeholder="Un subtitulo ..."[(ngModel)]="subtitulo"/>-->
       <!-- Material input -->
-      <div class="md-form">
+      <div class="md-form mt-0">
+        <input class="form-control" type="text" placeholder="Titulo" aria-label="Search" [(ngModel)]="subtitulo">
+      </div>
+      <!--<div class="md-form">
         <input type="text" id="form1" class="form-control" [(ngModel)]="subtitulo">
         <label for="form1">Subtitulo</label>
-      </div>
+      </div>-->
     </div>
   </div>
   <br>
