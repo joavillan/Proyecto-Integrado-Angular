@@ -21,6 +21,7 @@ export class SettingsComponent implements OnInit {
   newpass2:string;
   showSpinner:boolean = false;
   nombreIcono:string;
+  iconoEx:string;
   userid;
   userObj;
 
@@ -57,6 +58,7 @@ export class SettingsComponent implements OnInit {
   cambiarImagen(){
     this.user.obtenerUsuario().subscribe((resp:any)=>{
       this.nombreIcono = resp.id;
+      this.iconoEx = resp.icono.slice((resp.icono.lastIndexOf("/") - 1 >>> 0) + 2);
       this.userObj = {
         "username":resp.username,
         "password": JSON.parse(localStorage.getItem('pass')),
@@ -67,6 +69,7 @@ export class SettingsComponent implements OnInit {
         "emailVerified":resp.emailVerified
       };
       if (this.file != null) {
+        this.image.removeImageById(this.iconoEx).subscribe();
         this.subirImagen();
         this.userObj.icono = `${URL_API}images/images/download/${this.nombreIcono}`;
         this.user.putUser(this.userObj);
