@@ -66,9 +66,19 @@ export class SettingsComponent implements OnInit {
         "rol":resp.rol,
         "emailVerified":resp.emailVerified
       };
-      this.subirImagen();
-      this.userObj.icono = `${URL_API}images/images/download/${this.nombreIcono}`;
-      this.user.putUser(this.userObj);
+      if (this.file != null) {
+        this.subirImagen();
+        this.userObj.icono = `${URL_API}images/images/download/${this.nombreIcono}`;
+        this.user.putUser(this.userObj);
+      }else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Asegúrate de haber seleccionado una imagen',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
       /*Swal.fire(
         '¡Imagen cambiada!',
         'Pulsa OK para continuar cocinando',
