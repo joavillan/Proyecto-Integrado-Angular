@@ -13,7 +13,7 @@ import { RecetaModel } from 'src/app/Models/RecetaModel';
   styleUrls: ['./crear-receta.component.css']
 })
 export class CrearRecetaComponent implements OnInit {
-  imagename: string;
+  imagename: string = '';
   nombreIcono: string;
   comentarios: [{}];
 
@@ -80,7 +80,7 @@ export class CrearRecetaComponent implements OnInit {
 
   subirReceta(){
     console.log(this.titulo)
-    if (this.editar == false && this.imagename == '' || this.conImage == false) {
+    if (this.editar == false && this.imagename == '' || this.conImage == false || this.editar == true && this.file != null) {
       console.log('enta');
       this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}Img`+'.'+this.ext;
       this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;

@@ -60,6 +60,7 @@ export class ListaComponent implements OnInit {
           for(let da of data){
             if(da.categoria=='Comidas'){
               this.recetas.push(da);
+              this.recetas.reverse();
             }
           }
           console.log(this.receta)
@@ -73,6 +74,7 @@ export class ListaComponent implements OnInit {
           for(let da of data){
             if(da.categoria=='Postres'){
               this.recetas.push(da);
+              this.recetas.reverse();
             }
           }
           console.log(this.receta)
@@ -82,12 +84,6 @@ export class ListaComponent implements OnInit {
         break;
         case 'Comentadas':
         this.receta.getReceta().subscribe((data:any)=>{
-        
-          /*for(let da of data){
-            if(da.categoria=='Postres'){
-              this.recetas.push(da);
-            }
-          }*/
           this.recetas = data.sort(function (a, b){
             return (b.ncomen - a.ncomen)
         })
@@ -99,12 +95,6 @@ export class ListaComponent implements OnInit {
         break;
         case 'Megusta':
         this.receta.getReceta().subscribe((data:any)=>{
-        
-          /*for(let da of data){
-            if(da.categoria=='Postres'){
-              this.recetas.push(da);
-            }
-          }*/
           this.recetas = data.sort(function (a, b){
             return (b.mg - a.mg)
         })
