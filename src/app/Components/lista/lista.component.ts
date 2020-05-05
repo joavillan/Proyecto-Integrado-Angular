@@ -11,7 +11,7 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class ListaComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute,private receta:RecetaService,private user:UserService) { }
+  constructor(private router:ActivatedRoute,private receta:RecetaService,private user:UserService, private param:ActivatedRoute) { }
 
   idElim: any;
   idU: any;
@@ -26,14 +26,94 @@ export class ListaComponent implements OnInit {
   likeado:boolean;
 
   ngOnInit() {
-    this.load();
+    //this.load();
+    this.param.params.subscribe(event => {
+      this.categoria = event.categoria;
+     });
+    this.load()
   }
 
   load(){
-    this.receta.getReceta().subscribe((res:any)=>{
+    /*this.receta.getReceta().subscribe((res:any)=>{
       this.recetas = res;
       this.recetas.reverse();
-    })
+    })*/
+    switch (this.categoria) {
+      case 'Ultimas':
+        this.receta.getReceta().subscribe((data:any)=>{
+          this.recetas = data;
+          this.recetas.reverse();
+          /*for(let da of data){
+            this.recetas.reverse();
+            if(da.categoria=='Comidas'){
+              this.recetas.push(da);
+            }
+          }*/
+          console.log(this.receta)
+        },(error)=>{
+          console.log('algo ha fallado')
+        })
+        break;
+      case 'Comidas':
+        this.receta.getReceta().subscribe((data:any)=>{
+        
+          for(let da of data){
+            if(da.categoria=='Comidas'){
+              this.recetas.push(da);
+            }
+          }
+          console.log(this.receta)
+        },(error)=>{
+          console.log('algo ha fallado')
+        })
+        break;
+        case 'Postres':
+        this.receta.getReceta().subscribe((data:any)=>{
+        
+          for(let da of data){
+            if(da.categoria=='Postres'){
+              this.recetas.push(da);
+            }
+          }
+          console.log(this.receta)
+        },(error)=>{
+          console.log('algo ha fallado')
+        })
+        break;
+        case 'Comentadas':
+        this.receta.getReceta().subscribe((data:any)=>{
+        
+          /*for(let da of data){
+            if(da.categoria=='Postres'){
+              this.recetas.push(da);
+            }
+          }*/
+          this.recetas = data.sort(function (a, b){
+            return (b.ncomen - a.ncomen)
+        })
+
+          console.log(this.receta)
+        },(error)=>{
+          console.log('algo ha fallado')
+        })
+        break;
+        case 'Megusta':
+        this.receta.getReceta().subscribe((data:any)=>{
+        
+          /*for(let da of data){
+            if(da.categoria=='Postres'){
+              this.recetas.push(da);
+            }
+          }*/
+          this.recetas = data.sort(function (a, b){
+            return (b.mg - a.mg)
+        })
+          console.log(this.receta)
+        },(error)=>{
+          console.log('algo ha fallado')
+        })
+        break;
+      }
   }
 
   buscar(args:string){

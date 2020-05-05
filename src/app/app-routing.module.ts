@@ -19,17 +19,17 @@ const routes: Routes = [
   },
   { path: 'LogIn', component: LoginComponent, canActivate:[IsloggedService]
   },
-  { path: 'Lista', component: ListaComponent
+  { path: 'Lista/:categoria', component: ListaComponent
   },
   { path: 'CrearReceta', component: CrearRecetaComponent
   },
-  { path: 'Lista/:id', component: RecetaComponent
+  { path: 'Receta/:id', component: RecetaComponent
   },
   { path: 'Settings', component: SettingsComponent
   },
   { path: 'Verify/:id', component: VerifyComponent
   },
-  {path: '', redirectTo: '/Home',pathMatch: 'full'},
+  {path: '', redirectTo: 'Lista/Ultimas',pathMatch: 'full'},
   {
     path        : '**',
     pathMatch   : 'full',
