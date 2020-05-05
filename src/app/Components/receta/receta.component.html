@@ -47,8 +47,13 @@
 
   <!-- Titulo -->
   <div class="row">
-    <div class="col-lg-10">
+    <div class="col-lg-8">
       <h1><b>{{recetaPage.titulo}}</b></h1>
+    </div>
+    <div class="col-lg-2" *ngIf="rol == 'admin'">
+      <a routerLink="/EditarReceta/{{this.id}}" routerLinkActive="active">
+        <button class="btn btn-primary" type="button">Editar</button>
+      </a>
     </div>
     <div class="col-lg-2" *ngIf="rol == 'admin'">
       <button class="btn btn-danger" type="button" (click)="eliminarReceta()">Eliminar</button>

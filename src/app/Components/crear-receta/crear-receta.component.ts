@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { RecetaService } from 'src/app/Services/receta.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ImageService } from 'src/app/Services/image.service';
 import { URL_API } from 'src/app/Cons/cons';
 import Swal from 'sweetalert2'
 import { DomSanitizer } from '@angular/platform-browser';
+import { RecetaModel } from 'src/app/Models/RecetaModel';
 
 @Component({
   selector: 'app-crear-receta',
@@ -14,9 +15,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CrearRecetaComponent implements OnInit {
   imagename: string;
   nombreIcono: string;
+  comentarios: [{}];
 
-  constructor(private receta:RecetaService, private sanitizer:DomSanitizer, private imageS:ImageService, private router:Router) { }
+  constructor(private receta:RecetaService, private sanitizer:DomSanitizer, private imageS:ImageService, private router:Router, private routerEdit:ActivatedRoute) { }
 
+  id;
+  editar:boolean = false;
+  conImage:boolean = true;
   titulo="";
   subtitulo=""
   categoria="Comidas";
@@ -52,14 +57,35 @@ export class CrearRecetaComponent implements OnInit {
   };
 
   ngOnInit() {
-    console.log(this.visible);
+    this.routerEdit.params.subscribe(event => {
+      this.id = event.id;
+     });
+     this.receta.getRecetaById(this.id).subscribe((data:RecetaModel)=>{
+      this.editar=true;
+      this.cuerpo = data.cuerpo;
+      this.subtitulo=data.subtitulo;
+      this.titulo=data.titulo;
+      this.categoria=data.categoria;
+      this.comentarios=data.comentarios;
+      this.imagename=data.img;
+      this.img=data.img;
+      console.log('Imagen: '+this.imagename);
+      if (data.img == null) {
+        this.conImage = false;
+        console.log(this.conImage)
+      }
+     })
+    //console.log(this.visible);
   }
 
   subirReceta(){
     console.log(this.titulo)
-    this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}Img`+'.'+this.ext;
-    this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
-    this.subirImagen();
+    if (this.editar == false && this.imagename == '' || this.conImage == false) {
+      console.log('enta');
+      this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}Img`+'.'+this.ext;
+      this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
+      this.subirImagen();
+    }
     let f:Date = new Date();
     let fe = f.getDay()+'/'+f.getMonth()+'/'+f.getUTCFullYear();
     this.fecha = fe;
@@ -76,16 +102,39 @@ export class CrearRecetaComponent implements OnInit {
       mgs:[],
       ncomen:this.ncomen
     }
-    this.receta.postReceta(recetaModel).subscribe((resp)=>{
-      Swal.fire(
-        '¡Receta creada!',
-        'Pulsa OK para continuar cocinando',
-        'success'
-      )
-      //alert('Receta creada');
-    },(err)=>{
-      alert('Error al crear la receta: \n'+err);
-    });
+    if (this.editar == false) {
+      this.receta.postReceta(recetaModel).subscribe((resp)=>{
+        Swal.fire(
+          '¡Receta creada!',
+          'Pulsa OK para continuar cocinando',
+          'success'
+        )
+        //alert('Receta creada');
+      },(err)=>{
+        Swal.fire(
+          '¡Error!',
+          'Error al crear la receta',
+          'error'
+        )
+        //alert('Error al crear la receta: \n'+err);
+      });
+    }else {
+      this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
+        Swal.fire(
+          '¡Receta actualizada!',
+          'Pulsa OK para continuar cocinando',
+          'success'
+        )
+        //alert('Receta creada');
+      },(err)=>{
+        Swal.fire(
+          '¡Error!',
+          'Error al actualizar la receta',
+          'error'
+        )
+        //alert('Error al editar la receta: \n'+err);
+      });
+    }
   }
 
   handleFileSelect(evt){

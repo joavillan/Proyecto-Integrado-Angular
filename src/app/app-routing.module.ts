@@ -23,6 +23,8 @@ const routes: Routes = [
   },
   { path: 'CrearReceta', component: CrearRecetaComponent
   },
+  { path: 'EditarReceta/:id', component: CrearRecetaComponent
+  },
   { path: 'Receta/:id', component: RecetaComponent
   },
   { path: 'Settings', component: SettingsComponent
