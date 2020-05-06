@@ -73,6 +73,7 @@ export class SettingsComponent implements OnInit {
         this.subirImagen();
         this.userObj.icono = `${URL_API}images/images/download/${this.nombreIcono}`;
         this.user.putUser(this.userObj);
+        //location.reload();
       }else {
         Swal.fire({
           position: 'top-end',
@@ -123,8 +124,8 @@ _handleReaderLoaded(readerEvt) {
           showConfirmButton: false,
           timer: 1500
         })
-        
         console.log('Se ha actualizado el icono correctamente');
+        window.location.reload();
       },
       (err) => {
         Swal.fire({

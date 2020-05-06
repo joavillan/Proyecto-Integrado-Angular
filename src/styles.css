@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+html,body{
+    /*background-image: url("assets/fondo.png");*/
+    /*background-image: url("http://localhost:3000/api/images/images/download/fondo.png");*/
+    /*background-color: rgb(219, 219, 219);*/
+}
+
 .fondo{
-    background-image: url("https://previews.123rf.com/images/hatza/hatza1108/hatza110800006/10191855-comida-y-bebida-patr%C3%B3n-transparente.jpg");
+    /*background-image: url("https://previews.123rf.com/images/hatza/hatza1108/hatza110800006/10191855-comida-y-bebida-patr%C3%B3n-transparente.jpg");*/
+    background-color: white;
 }
 
 .texto{

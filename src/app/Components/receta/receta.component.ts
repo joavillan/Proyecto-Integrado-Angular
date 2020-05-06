@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecetaService } from 'src/app/Services/receta.service';
 import { RecetaModel } from 'src/app/Models/RecetaModel';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
 import Swal from 'sweetalert2';
 import { ImageService } from 'src/app/Services/image.service';
@@ -13,7 +13,7 @@ import { ImageService } from 'src/app/Services/image.service';
 })
 export class RecetaComponent implements OnInit {
 
-  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService, private image:ImageService) {
+  constructor(private router:ActivatedRoute,private receta:RecetaService, private user:UserService, private image:ImageService, private rout:Router) {
     if(JSON.parse(localStorage.getItem('token'))!=null){
       this.idu = JSON.parse(localStorage.getItem('token')).userId;
       console.log(this.idu);
@@ -95,12 +95,13 @@ export class RecetaComponent implements OnInit {
             'Esta receta ha sido borrada',
             'success'
           )
+          this.rout.navigate(['/Lista/Ultimas']);
         },(error)=>{
           /*console.log(`error al eliminar comentario`),
           console.log(this.recetaPage);*/
           Swal.fire(
             '¡Error!',
-            'Tu comentario no ha sido borrado',
+            'La receta no ha sido borrada',
             'error'
           )
         });

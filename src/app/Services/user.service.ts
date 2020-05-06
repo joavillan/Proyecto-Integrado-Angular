@@ -46,6 +46,7 @@ export class UserService {
         console.log('usuario modificado: ',data);
       }
     );
+    //window.location.reload();
   }
 
   findOne(user){

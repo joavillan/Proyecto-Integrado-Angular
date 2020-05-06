@@ -23,7 +23,7 @@ export class SigInComponent implements OnInit {
   ngOnInit() {
     this.rol = JSON.parse(localStorage.getItem('rol'));
     if(localStorage.getItem('token')!=null && this.rol != 'admin'){
-      this.router.navigate(['/Home']);
+      this.router.navigate(['/Lista/Ultimas']);
     }
   }
 

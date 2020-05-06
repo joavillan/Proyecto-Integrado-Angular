@@ -109,6 +109,7 @@ export class CrearRecetaComponent implements OnInit {
           'Pulsa OK para continuar cocinando',
           'success'
         )
+        this.router.navigate(['/Lista/Ultimas']);
         //alert('Receta creada');
       },(err)=>{
         Swal.fire(
@@ -125,6 +126,7 @@ export class CrearRecetaComponent implements OnInit {
           'Pulsa OK para continuar cocinando',
           'success'
         )
+        this.router.navigate(['/Receta/'+this.id]);
         //alert('Receta creada');
       },(err)=>{
         Swal.fire(
