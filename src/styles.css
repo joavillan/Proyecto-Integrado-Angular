@@ -5,6 +5,26 @@ html,body{
     /*background-color: rgb(219, 219, 219);*/
 }
 
+.icono {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.image {
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
 .fondo{
     /*background-image: url("https://previews.123rf.com/images/hatza/hatza1108/hatza110800006/10191855-comida-y-bebida-patr%C3%B3n-transparente.jpg");*/
     background-color: white;

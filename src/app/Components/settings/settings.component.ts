@@ -24,8 +24,20 @@ export class SettingsComponent implements OnInit {
   iconoEx:string;
   userid;
   userObj;
+  icono;
 
   ngOnInit() {
+    this.obtenerIcono();
+  }
+
+  obtenerIcono(){
+    let dato;
+    this.user.obtenerUsuario().subscribe((data)=>{
+      dato = data;
+      this.icono = dato.icono;
+    },(error)=>{
+      console.log('ha ocurrido un error al obtener datos')
+    });
   }
 
   cambiarPassword(){
