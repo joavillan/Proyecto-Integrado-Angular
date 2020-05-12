@@ -117,8 +117,6 @@
       <select class="browser-default custom-select" [(ngModel)]="categoria">
         <option selected>Comidas</option>
         <option>Postres</option>
-        <option>Two</option>
-        <option>Three</option>
       </select>
     </div>
   </div>
@@ -135,6 +133,12 @@
       </div>
     </div>
   </div>
+  <br>
+
+  <!-- Tags -->
+  <h3>Tags</h3>
+  <tag-input [(ngModel)]='tags' [maxItems]='5'></tag-input>
+  <br>
   <br>
 
   <!-- Botones -->

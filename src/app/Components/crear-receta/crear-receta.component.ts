@@ -34,6 +34,8 @@ export class CrearRecetaComponent implements OnInit {
   file;
   ext="";
   visible:boolean=false;
+  tags;
+  items:any[]=[];
   config = {
     "editable": true,
     "spellcheck": true,
@@ -66,6 +68,8 @@ export class CrearRecetaComponent implements OnInit {
       this.subtitulo=data.subtitulo;
       this.titulo=data.titulo;
       this.categoria=data.categoria;
+      console.log(data.tags);
+      this.tags=data.tags;
       this.comentarios=data.comentarios;
       this.imagename=data.img;
       this.img=data.img;
@@ -86,16 +90,24 @@ export class CrearRecetaComponent implements OnInit {
       this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
       this.subirImagen();
     }
+
+    for (let itm of this.tags) {
+      if (this.tags != null) {
+        this.items.push(itm.value);
+      }
+    }
     let f:Date = new Date();
     let fe = f.getDay()+'/'+f.getMonth()+'/'+f.getUTCFullYear();
     this.fecha = fe;
     console.log(this.fecha);
+    console.log('subiendo tags:'+this.items);
     let recetaModel={
       titulo:this.titulo.replace('<','').replace('>',''),
       subtitulo:this.subtitulo,
       categoria:this.categoria,
       cuerpo:this.cuerpo,
       img:this.imagename,
+      tags:this.items,
       comentarios:[],
       fecha:this.fecha,
       mg:this.mg,

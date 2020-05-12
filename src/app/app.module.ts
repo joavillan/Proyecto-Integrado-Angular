@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxEditorModule } from 'ngx-editor';
+import { TagInputModule } from 'ngx-chips';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +40,9 @@ import { SettingsComponent } from './Components/settings/settings.component';
     HttpClientModule,
     FormsModule,
     TooltipModule.forRoot(),
-    NgxEditorModule
+    NgxEditorModule,
+    TagInputModule, 
+    BrowserAnimationsModule
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

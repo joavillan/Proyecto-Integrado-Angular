@@ -1,0 +1,7 @@
+@media(max-width: 767.98px) {
+    .imag {
+        width: 100%;
+        max-width: 250px;
+        height: auto;
+    }
+}

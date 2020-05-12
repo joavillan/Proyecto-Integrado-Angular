@@ -43,7 +43,7 @@ export class RecetaComponent implements OnInit {
     ]
 };
 
-  comentarioDummy;
+  comentarioDummy='';
   id;
   idu="";
   rol;
