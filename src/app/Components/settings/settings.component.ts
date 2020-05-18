@@ -68,6 +68,12 @@ export class SettingsComponent implements OnInit {
   }
 
   cambiarImagen(){
+    Swal.fire({
+      position: 'top-end',
+      title: 'Cargando...',
+      showConfirmButton: false,
+    })
+    Swal.showLoading();
     this.user.obtenerUsuario().subscribe((resp:any)=>{
       this.nombreIcono = resp.id;
       this.iconoEx = resp.icono.slice((resp.icono.lastIndexOf("/") - 1 >>> 0) + 2);
@@ -129,6 +135,7 @@ _handleReaderLoaded(readerEvt) {
     this.image.uploadImage(this.img, this.nombreIcono).subscribe(
       (res) => {
         //alert('Se ha actualizado el icono correctamente');
+        Swal.close();
         Swal.fire({
           position: 'top-end',
           icon: 'success',

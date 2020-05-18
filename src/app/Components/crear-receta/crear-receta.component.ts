@@ -83,6 +83,12 @@ export class CrearRecetaComponent implements OnInit {
   }
 
   subirReceta(){
+    Swal.fire({
+      position: 'top-end',
+      title: 'Cargando...',
+      showConfirmButton: false,
+    })
+    Swal.showLoading();
     console.log(this.titulo)
     if (this.editar == false && this.imagename == '' || this.conImage == false || this.editar == true && this.file != null) {
       console.log('enta');
@@ -120,6 +126,7 @@ export class CrearRecetaComponent implements OnInit {
     }
     if (this.editar == false) {
       this.receta.postReceta(recetaModel).subscribe((resp)=>{
+        Swal.close();
         Swal.fire(
           '¡Receta creada!',
           'Pulsa OK para continuar cocinando',
@@ -137,6 +144,7 @@ export class CrearRecetaComponent implements OnInit {
       });
     }else {
       this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
+        Swal.close();
         Swal.fire(
           '¡Receta actualizada!',
           'Pulsa OK para continuar cocinando',
