@@ -66,6 +66,7 @@ export class RecetaComponent implements OnInit {
       console.log(dummy.img);
       this.recetaPage = dummy;
       console.log(this.recetaPage.img);
+      console.log('tagggs '+this.recetaPage.tags);
     },(err)=>{
       console.log(err);
       alert('Ha ocurrido un error al obtener el post: \n'+err.err)

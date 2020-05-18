@@ -68,8 +68,8 @@ export class CrearRecetaComponent implements OnInit {
       this.subtitulo=data.subtitulo;
       this.titulo=data.titulo;
       this.categoria=data.categoria;
-      console.log(data.tags);
-      this.tags=data.tags;
+      console.log('data tags: '+data.tags);
+      //this.tags=data.tags;
       this.comentarios=data.comentarios;
       this.imagename=data.img;
       this.img=data.img;
@@ -91,11 +91,15 @@ export class CrearRecetaComponent implements OnInit {
       this.subirImagen();
     }
 
-    for (let itm of this.tags) {
-      if (this.tags != null) {
-        this.items.push(itm.value);
+    if (this.editar == true && this.tags != null || this.editar == false && this.tags != null) {
+      for (let itm of this.tags) {
+        console.log(itm);
+        if (this.tags != null) {
+          this.items.push(itm.value);
+        }
       }
     }
+
     let f:Date = new Date();
     let fe = f.getDay()+'/'+f.getMonth()+'/'+f.getUTCFullYear();
     this.fecha = fe;

@@ -81,17 +81,22 @@
   <br>
   
   <!-- Tags -->
-  <div *ngIf='recetaPage.tags != null'>
-    <h5>Tags</h5>
-    <hr>
+  <h4>Tags</h4>
+  <div class="row">
     <div *ngFor='let tag of recetaPage.tags'>
-      <div class="col-lg-1">
+      <div class="">
         <span class="badge badge-pill"  style="background-color: #880e4f;">{{tag}}</span>
       </div>
     </div>
   </div>
-  <hr>
   <br>
+  <div *ngIf="recetaPage.tags != null || recetaPage.tags != '' || recetaPage.tags != undefined">
+    <!--<h5>Tags</h5>
+    <hr>
+    
+  </div>
+  <hr>
+  <br>-->
 
   <!-- Comentarios -->
   <div class="row">

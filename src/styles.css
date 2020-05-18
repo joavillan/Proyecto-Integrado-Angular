@@ -25,6 +25,15 @@ html,body{
     border-bottom-left-radius: 50%;
 }
 
+.img {
+    width: 440px;
+    height: 320px;
+}
+
+.carta {
+    height: 560px;
+}
+
 .fondo{
     /*background-image: url("https://previews.123rf.com/images/hatza/hatza1108/hatza110800006/10191855-comida-y-bebida-patr%C3%B3n-transparente.jpg");*/
     background-color: white;

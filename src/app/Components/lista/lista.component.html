@@ -1,14 +1,29 @@
 <br>
 <div class="container">
+
+    <!--<input type="text" [(ngModel)]="term">
+    <br>
+    <br>-->
     <div class="row">
-        <div class="col-lg-4" *ngFor = "let receta of recetas,let i = index;">
+        <div class="col-lg-6">
+            <div class="md-form">
+                <i class="fas fa-search prefix"></i>
+                <input type="text" id="inputIconEx1" class="form-control" [(ngModel)]="term">
+                <label for="inputIconEx1">Barra de búsqueda</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-4" *ngFor = "let receta of recetas |filter:term,let i = index;">
             
             <!-- Card Narrower -->
-            <div class="card card-cascade narrower">
+            <div class="card card-cascade narrower carta">
 
                 <!-- Card image -->
                 <div class="view view-cascade overlay">
-                <img class="card-img-top" src="{{receta.img}}"
+                <img class="card-img-top img" src="{{receta.img}}"
                     alt="Card image cap">
                 <a>
                     <div class="mask rgba-white-slight"></div>

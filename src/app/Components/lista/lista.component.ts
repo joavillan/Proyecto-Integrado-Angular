@@ -24,6 +24,7 @@ export class ListaComponent implements OnInit {
   tpp = 10;
   recetaPage:RecetaModel;
   likeado:boolean;
+  term;
 
   ngOnInit() {
     //this.load();
