@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecetaService } from 'src/app/Services/receta.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { UserService } from 'src/app/Services/user.service';
 })
 export class VerifyComponent implements OnInit {
 
-  constructor(private user:UserService, private route: ActivatedRoute) { }
+  constructor(private user:UserService, private route: ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
     let emailId = this.route.snapshot.paramMap.get("id");
@@ -18,6 +18,7 @@ export class VerifyComponent implements OnInit {
       emailVerified : true
     }
     this.user.patchUserById(emailId, ver).subscribe();
+    this.router.navigate(['/Lista/Ultimas']);
     /*this.user.obtenerUsuario().subscribe((data)=>{
       let tmp = {
         realm : datos.realm,
