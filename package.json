@@ -4,12 +4,11 @@
   "heroku-postbuild": "ng build --prod",
   "scripts": {
     "ng": "ng",
-    "test": "ng test",
     "build": "ng build",
+    "test": "ng test",
     "lint": "ng lint",
     "start": "node Server.js",
-    "e2e": "ng e2e",
-    "lite": "lite-server"
+    "e2e": "ng e2e"
   },
   "engines": {
     "node": "12.16.2",
