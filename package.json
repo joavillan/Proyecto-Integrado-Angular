@@ -1,12 +1,13 @@
 {
   "name": "proyecto-integrado-angular",
   "version": "0.0.0",
+  "heroku-postbuild": "ng build --prod",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "start": "node Server.js",
     "e2e": "ng e2e"
   },
   "private": true,
