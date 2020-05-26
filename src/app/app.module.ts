@@ -17,7 +17,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { ListaComponent } from './Components/lista/lista.component';
 import { CrearRecetaComponent } from './Components/crear-receta/crear-receta.component';
 import { RecetaComponent } from './Components/receta/receta.component';
-import { SafePipe } from './Pipes/safePipe';
+import { SafePipe } from './Pipes/SafePipe';
 import { VerifyComponent } from './Components/verify/verify.component';
 import { SettingsComponent } from './Components/settings/settings.component';
 
