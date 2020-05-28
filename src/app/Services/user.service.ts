@@ -58,19 +58,7 @@ export class UserService {
   }
 
   loginUser(user){
-    this.http.post(`${URL_API}users/login`,user).subscribe(
-      (response)=>{
-        localStorage.setItem('token',JSON.stringify(response));
-        localStorage.setItem('pass',JSON.stringify(user.password));
-        console.log('Correct login');
-        this.guardarRol();
-        window.location.reload();
-        //JSON.parse() para convertir el string almacenado en un JSON.
-      },(error) => {
-        console.log('error',error.error.error.message)
-        alert('Usuario o contraseña incorrectos')
-      }
-      ); 
+    return this.http.post(`${URL_API}users/login`,user);
   }
 
   logoutUser(token){
