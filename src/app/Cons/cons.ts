@@ -1,1 +1,1 @@
-export const URL_API = 'http://loopbackpi.herokuapp.com/api/';
+export const URL_API = 'https://loopbackpi.herokuapp.com/api/';
