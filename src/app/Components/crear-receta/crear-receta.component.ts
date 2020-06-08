@@ -108,7 +108,7 @@ export class CrearRecetaComponent implements OnInit {
 
     let f:Date = new Date();
     console.log(f);
-    let fe = f.getDay()+'/'+f.getMonth()+1+'/'+f.getUTCFullYear();
+    let fe = f.getDate()+'/'+(f.getMonth()+1)+'/'+f.getUTCFullYear();
     this.fecha = fe;
     console.log(this.fecha);
     console.log('subiendo tags:'+this.items);
