@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDO0csF1Sf022HLXhkxDfZyW9VgNURUyoU",
+    authDomain: "imagenes-cookingworld.firebaseapp.com",
+    databaseURL: "https://imagenes-cookingworld.firebaseio.com",
+    projectId: "imagenes-cookingworld",
+    storageBucket: "imagenes-cookingworld.appspot.com",
+    messagingSenderId: "593811747259",
+    appId: "1:593811747259:web:c813a3d637d616d81d949e"
+  }
 };
 
 /*

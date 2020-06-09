@@ -3,6 +3,7 @@ import { UserService } from 'src/app/Services/user.service';
 import { URL_API } from 'src/app/Cons/cons';
 import { ImageService } from 'src/app/Services/image.service';
 import Swal from 'sweetalert2';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-settings',
@@ -10,8 +11,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-
-  constructor(private user:UserService, private image:ImageService) { }
+  filePath: any;
+  Imgsrc: any;
+  Imgpreview: any;
+  
+  constructor(private user:UserService, private image:ImageService, private storage:AngularFireStorage) { }
 
   file: any;
   ext: any;
@@ -115,22 +119,23 @@ export class SettingsComponent implements OnInit {
     this.file = files[0];
     this.ext=this.file.name;
     this.ext = this.ext.slice((this.ext.lastIndexOf(".") - 1 >>> 0) + 2);
-  if (files && this.file) {
-      var reader = new FileReader();
+    if (files && this.file) {
+        var reader = new FileReader();
 
-      reader.onload =this._handleReaderLoaded.bind(this);
+        reader.onload =this._handleReaderLoaded.bind(this);
 
-      reader.readAsBinaryString(this.file);
+        reader.readAsBinaryString(this.file);
+    }
   }
-}
 
-_handleReaderLoaded(readerEvt) {
-  var binaryString = readerEvt.target.result;
-  this.img= btoa(binaryString);
-  console.log(btoa(binaryString));
-}
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.img= btoa(binaryString);
+    console.log(btoa(binaryString));
+  }
+
   subirImagen(){
-    this.nombreIcono = this.nombreIcono+'.'+this.ext;
+    this.nombreIcono/* = this.nombreIcono+'.'+this.ext*/;
     
     this.image.uploadImage(this.img, this.nombreIcono).subscribe(
       (res) => {
@@ -159,4 +164,79 @@ _handleReaderLoaded(readerEvt) {
         console.log('Ha ocurrido un error en la subida de la imagen:'+err.err);
       })
   }
+
+  cambiaPreview(event:any){
+    if(event.target.files && event.target.files[0]){
+      const reader = new FileReader;
+      reader.onload = (e:any) => {
+        this.Imgsrc=e.target.result
+      }
+      reader.readAsDataURL(event.target.files[0])
+      this.Imgpreview=event.target.files[0]
+    }else{
+      this.Imgpreview=null;
+    }
+  }
+
+  firebase() {
+    Swal.fire({
+      position: 'top-end',
+      title: 'Cargando...',
+      showConfirmButton: false,
+    })
+    Swal.showLoading();
+    this.user.obtenerUsuario().subscribe((resp:any)=>{
+      this.nombreIcono = resp.id;
+      this.userObj = {
+        "username":resp.username,
+        "password": JSON.parse(localStorage.getItem('pass')),
+        "realm":resp.realm,
+        "icono": "lleno",
+        "email":resp.email,
+        "rol":resp.rol,
+        "emailVerified":resp.emailVerified
+      };
+      if (this.Imgpreview != null || this.Imgpreview != undefined) {
+        this.filePath = this.nombreIcono;
+        const fileRef = this.storage.ref(this.filePath);
+        this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
+          fileRef.getDownloadURL().subscribe((url) => {
+      
+            setTimeout(() => {
+              var imagename=''
+              imagename = url;
+              console.log(imagename);
+              this.userObj.icono = imagename;
+              console.log("Imagen "+this.userObj.icono)
+              Swal.close();
+              Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Icono cambiado!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            console.log('Se ha actualizado el icono correctamente');
+
+            this.user.putUser(this.userObj);
+
+            window.location.reload();
+            }, 1000);
+
+          })
+        })
+        console.log(this.userObj);
+        //location.reload();
+      }else {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Asegúrate de haber seleccionado una imagen',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
+  }
+  
 }

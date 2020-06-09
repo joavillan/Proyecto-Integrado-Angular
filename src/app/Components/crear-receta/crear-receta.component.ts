@@ -6,6 +6,7 @@ import { URL_API } from 'src/app/Cons/cons';
 import Swal from 'sweetalert2'
 import { DomSanitizer } from '@angular/platform-browser';
 import { RecetaModel } from 'src/app/Models/RecetaModel';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-crear-receta',
@@ -16,8 +17,11 @@ export class CrearRecetaComponent implements OnInit {
   imagename: string = '';
   nombreIcono: string;
   comentarios: [{}];
+  filePath: any;
+  Imgsrc: any;
+  Imgpreview: any;
 
-  constructor(private receta:RecetaService, private sanitizer:DomSanitizer, private imageS:ImageService, private router:Router, private routerEdit:ActivatedRoute) { }
+  constructor(private receta:RecetaService, private sanitizer:DomSanitizer, private imageS:ImageService, private router:Router, private routerEdit:ActivatedRoute, private storage:AngularFireStorage) { }
 
   id;
   editar:boolean = false;
@@ -64,6 +68,7 @@ export class CrearRecetaComponent implements OnInit {
      });
      this.receta.getRecetaById(this.id).subscribe((data:RecetaModel)=>{
       this.editar=true;
+      this.fecha=data.fecha;
       this.cuerpo = data.cuerpo;
       this.subtitulo=data.subtitulo;
       this.titulo=data.titulo;
@@ -92,11 +97,141 @@ export class CrearRecetaComponent implements OnInit {
     console.log(this.titulo)
     if (this.editar == false && this.imagename == '' || this.conImage == false || this.editar == true && this.file != null) {
       console.log('enta');
-      this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}Img`+'.'+this.ext;
+      this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}`;
       this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
-      this.subirImagen();
+      if (this.Imgpreview != null || this.Imgpreview != undefined) {
+        this.filePath = this.nombreIcono;
+        const fileRef = this.storage.ref(this.filePath);
+        this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
+          fileRef.getDownloadURL().subscribe((url) => {
+      
+            setTimeout(() => {
+              console.log("console.log(Este wao)");
+              this.imagename = url;
+              this.subirImagen();
+            }, 500);
+          })
+        })
+      }
+      //this.subirImagen();
     }
+  }
 
+  /*handleFileSelect(evt){
+    var files = evt.target.files;
+    this. file = files[0];
+    this.ext=this.file.name;
+    this.ext = this.ext.slice((this.ext.lastIndexOf(".") - 1 >>> 0) + 2);
+    if (files && this.file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(this.file);
+    }
+  }
+
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+    this.img= btoa(binaryString);
+    console.log(btoa(binaryString));
+  }*/
+
+  cambiaPreview(event:any){
+    if(event.target.files && event.target.files[0]){
+      const reader = new FileReader;
+      reader.onload = (e:any) => {
+        this.Imgsrc=e.target.result
+      }
+      reader.readAsDataURL(event.target.files[0])
+      this.Imgpreview=event.target.files[0]
+    }else{
+      this.Imgpreview=null;
+    }
+  }
+
+  actualizarReceta() {
+    Swal.fire({
+      position: 'top-end',
+      title: 'Cargando...',
+      showConfirmButton: false,
+    })
+    Swal.showLoading();
+    this.filePath = this.titulo;
+    const fileRef = this.storage.ref(this.filePath);
+    if (this.Imgpreview == null) {
+      let recetaModel={
+        titulo:this.titulo.replace('<','').replace('>',''),
+        subtitulo:this.subtitulo,
+        categoria:this.categoria,
+        cuerpo:this.cuerpo,
+        img:this.imagename,
+        tags:this.items,
+        comentarios:[],
+        fecha:this.fecha,
+        mg:this.mg,
+        mgs:[],
+        ncomen:this.ncomen
+      }
+      this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
+        Swal.close();
+        Swal.fire(
+          '¡Receta actualizada!',
+          'Pulsa OK para continuar cocinando',
+          'success'
+        )
+        this.router.navigate(['/Receta/'+this.id]);
+        //alert('Receta creada');
+      },(err)=>{
+        Swal.fire(
+          '¡Error!',
+          'Error al actualizar la receta',
+          'error'
+        )
+        //alert('Error al editar la receta: \n'+err);
+      });
+    }
+    this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
+      fileRef.getDownloadURL().subscribe((url) => {
+      setTimeout(() => {
+        var imagename=''
+        imagename = url;
+        let recetaModel={
+          titulo:this.titulo.replace('<','').replace('>',''),
+          subtitulo:this.subtitulo,
+          categoria:this.categoria,
+          cuerpo:this.cuerpo,
+          img:this.imagename,
+          tags:this.items,
+          comentarios:[],
+          fecha:this.fecha,
+          mg:this.mg,
+          mgs:[],
+          ncomen:this.ncomen
+        }
+        this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
+          Swal.close();
+          Swal.fire(
+            '¡Receta actualizada!',
+            'Pulsa OK para continuar cocinando',
+            'success'
+          )
+          this.router.navigate(['/Receta/'+this.id]);
+          //alert('Receta creada');
+        },(err)=>{
+          Swal.fire(
+            '¡Error!',
+            'Error al actualizar la receta',
+            'error'
+          )
+          //alert('Error al editar la receta: \n'+err);
+        });
+      }, 500);
+    })
+    })
+  }
+
+  subirImagen(){
     if (this.editar == true && this.tags != null || this.editar == false && this.tags != null) {
       for (let itm of this.tags) {
         console.log(itm);
@@ -162,37 +297,6 @@ export class CrearRecetaComponent implements OnInit {
         //alert('Error al editar la receta: \n'+err);
       });
     }
-  }
-
-  handleFileSelect(evt){
-    var files = evt.target.files;
-    this. file = files[0];
-    this.ext=this.file.name;
-    this.ext = this.ext.slice((this.ext.lastIndexOf(".") - 1 >>> 0) + 2);
-    if (files && this.file) {
-        var reader = new FileReader();
-
-        reader.onload =this._handleReaderLoaded.bind(this);
-
-        reader.readAsBinaryString(this.file);
-    }
-  }
-
-  _handleReaderLoaded(readerEvt) {
-    var binaryString = readerEvt.target.result;
-    this.img= btoa(binaryString);
-    console.log(btoa(binaryString));
-  }
-
-  subirImagen(){
-    
-    this.imageS.uploadImage(this.img, this.nombreIcono).subscribe(
-      (res) => {
-        
-      },
-      (err) => {
-        alert('Ha ocurrido un error en la subida de la imagen:'+err.err);
-      })
   }
 
 }

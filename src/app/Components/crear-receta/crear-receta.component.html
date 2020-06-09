@@ -98,7 +98,7 @@
       <h3 class="">Imagen</h3>
       <div class="input-group mb-3">
         <div class="custom-file">
-          <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02" (change)="handleFileSelect($event)">>
+          <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile02" (change)="cambiaPreview($event)">>
           <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02"></label>
         </div>
       </div>
@@ -144,7 +144,8 @@
   <!-- Botones -->
   <div class="row">
     <div class="col-lg-12">
-      <button class="btn btn-primary" (click)="subirReceta()"type="button">Publicar Receta</button> 
+      <button class="btn btn-primary" (click)="subirReceta()"type="button" *ngIf="this.editar==false">Publicar Receta</button>
+      <button class="btn btn-primary" (click)="actualizarReceta()"type="button" *ngIf="this.editar==true">Actualizar Receta</button> 
       <button class="btn btn-success" type="button" (click)="this.visible = !this.visible">Previsualizar</button>
     </div>
   </div>

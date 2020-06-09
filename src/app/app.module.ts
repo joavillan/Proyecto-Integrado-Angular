@@ -7,6 +7,10 @@ import { NgxEditorModule } from 'ngx-editor';
 import { TagInputModule } from 'ngx-chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -44,7 +48,10 @@ import { SettingsComponent } from './Components/settings/settings.component';
     NgxEditorModule,
     TagInputModule, 
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

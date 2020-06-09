@@ -37,7 +37,7 @@ export class UserService {
       
   }
 
-  putUser(data:{}){
+  putUser(data){
     let local = JSON.parse(localStorage.getItem('token'));
     let id = local.userId;
     let token = local.id;
