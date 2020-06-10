@@ -88,32 +88,42 @@ export class CrearRecetaComponent implements OnInit {
   }
 
   subirReceta(){
-    Swal.fire({
-      position: 'top-end',
-      title: 'Cargando...',
-      showConfirmButton: false,
-    })
-    Swal.showLoading();
-    console.log(this.titulo)
-    if (this.editar == false && this.imagename == '' || this.conImage == false || this.editar == true && this.file != null) {
-      console.log('enta');
-      this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}`;
-      this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
-      if (this.Imgpreview != null || this.Imgpreview != undefined) {
-        this.filePath = this.nombreIcono;
-        const fileRef = this.storage.ref(this.filePath);
-        this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
-          fileRef.getDownloadURL().subscribe((url) => {
-      
-            setTimeout(() => {
-              console.log("console.log(Este wao)");
-              this.imagename = url;
-              this.subirImagen();
-            }, 500);
+    if (this.titulo == null || this.titulo == '' || this.Imgpreview == null || this.Imgpreview == '') {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Asegúrate de haber escrito al menos el título y una imagen',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }else {
+      Swal.fire({
+        position: 'top-end',
+        title: 'Cargando...',
+        showConfirmButton: false,
+      })
+      Swal.showLoading();
+      console.log(this.titulo)
+      if (this.editar == false && this.imagename == '' || this.conImage == false || this.editar == true && this.file != null) {
+        console.log('enta');
+        this.nombreIcono = `${this.titulo.trim().replace('?','').replace('<','').replace('>','')}`;
+        this.imagename =URL_API+`images/images/download/${this.nombreIcono}`;
+        if (this.Imgpreview != null || this.Imgpreview != undefined) {
+          this.filePath = this.nombreIcono;
+          const fileRef = this.storage.ref(this.filePath);
+          this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
+            fileRef.getDownloadURL().subscribe((url) => {
+        
+              setTimeout(() => {
+                console.log("console.log(Este wao)");
+                this.imagename = url;
+                this.subirImagen();
+              }, 500);
+            })
           })
-        })
+        }
+        //this.subirImagen();
       }
-      //this.subirImagen();
     }
   }
 
@@ -151,51 +161,24 @@ export class CrearRecetaComponent implements OnInit {
   }
 
   actualizarReceta() {
-    Swal.fire({
-      position: 'top-end',
-      title: 'Cargando...',
-      showConfirmButton: false,
-    })
-    Swal.showLoading();
-    this.filePath = this.titulo;
-    const fileRef = this.storage.ref(this.filePath);
-    if (this.Imgpreview == null) {
-      let recetaModel={
-        titulo:this.titulo.replace('<','').replace('>',''),
-        subtitulo:this.subtitulo,
-        categoria:this.categoria,
-        cuerpo:this.cuerpo,
-        img:this.imagename,
-        tags:this.items,
-        comentarios:[],
-        fecha:this.fecha,
-        mg:this.mg,
-        mgs:[],
-        ncomen:this.ncomen
-      }
-      this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
-        Swal.close();
-        Swal.fire(
-          '¡Receta actualizada!',
-          'Pulsa OK para continuar cocinando',
-          'success'
-        )
-        this.router.navigate(['/Receta/'+this.id]);
-        //alert('Receta creada');
-      },(err)=>{
-        Swal.fire(
-          '¡Error!',
-          'Error al actualizar la receta',
-          'error'
-        )
-        //alert('Error al editar la receta: \n'+err);
-      });
-    }
-    this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
-      fileRef.getDownloadURL().subscribe((url) => {
-      setTimeout(() => {
-        var imagename=''
-        imagename = url;
+    if (this.titulo == null || this.titulo == '') {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Asegúrate de haber escrito al menos el título',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }else {
+      Swal.fire({
+        position: 'top-end',
+        title: 'Cargando...',
+        showConfirmButton: false,
+      })
+      Swal.showLoading();
+      this.filePath = this.titulo;
+      const fileRef = this.storage.ref(this.filePath);
+      if (this.Imgpreview == null) {
         let recetaModel={
           titulo:this.titulo.replace('<','').replace('>',''),
           subtitulo:this.subtitulo,
@@ -226,9 +209,46 @@ export class CrearRecetaComponent implements OnInit {
           )
           //alert('Error al editar la receta: \n'+err);
         });
-      }, 500);
-    })
-    })
+      }
+      this.storage.upload(this.filePath, this.Imgpreview).then(result=>{
+        fileRef.getDownloadURL().subscribe((url) => {
+        setTimeout(() => {
+          var imagename=''
+          imagename = url;
+          let recetaModel={
+            titulo:this.titulo.replace('<','').replace('>',''),
+            subtitulo:this.subtitulo,
+            categoria:this.categoria,
+            cuerpo:this.cuerpo,
+            img:this.imagename,
+            tags:this.items,
+            comentarios:[],
+            fecha:this.fecha,
+            mg:this.mg,
+            mgs:[],
+            ncomen:this.ncomen
+          }
+          this.receta.putRecetaById(this.id, recetaModel).subscribe((resp)=>{
+            Swal.close();
+            Swal.fire(
+              '¡Receta actualizada!',
+              'Pulsa OK para continuar cocinando',
+              'success'
+            )
+            this.router.navigate(['/Receta/'+this.id]);
+            //alert('Receta creada');
+          },(err)=>{
+            Swal.fire(
+              '¡Error!',
+              'Error al actualizar la receta',
+              'error'
+            )
+            //alert('Error al editar la receta: \n'+err);
+          });
+        }, 500);
+      })
+      })
+    }
   }
 
   subirImagen(){
